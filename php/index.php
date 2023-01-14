@@ -12,8 +12,9 @@
             <input type="image" src="../Iconos/search.svg" class="iconoPequeño" id="lupa">
             <input id="busqueda" placeholder="Encuentra tu próxima aventura">
         </form>
-    </div>
 
+    </div>
+    <!-- <img src="../Iconos/wave.svg" style="margin-top: -250px;"> -->
     <section>
         <h1>Rutas recomendadas</h1>
         <div id="rutasRecomendadas">
@@ -81,32 +82,34 @@
     <section style="padding-bottom: 40px;">
         <h1>¿Qué te apetece hacer?</h1>
         <div id="actividades">
-            <div class="botonCirculoPequeño rojo"><img src="../Iconos/caret-left.svg" alt="" class="iconoPequeño"></div>
-            <a class="link" href="busqueda.php">
-                <div class="actividad">
-                    <img src="../img/senderismo.jpg" alt="">
-                    <div class="textoSombra">Senderismo</div>
-                </div>
-            </a>
-            <a class="link" href="busqueda.php">
-                <div class="actividad">
-                    <img src="../img/montanismo.jpg" alt="">
-                    <div class="textoSombra">Montañismo</div>
-                </div>
-            </a>
-            <a class="link" href="busqueda.php">
-                <div class="actividad">
-                    <img src="../img/correr.jpg" alt="">
-                    <div class="textoSombra">Correr</div>
-                </div>
-            </a>
-            <a class="link" href="busqueda.php">
-                <div class="actividad">
-                    <img src="../img/ciclismo.jpg" alt="">
-                    <div class="textoSombra">Ciclismo</div>
-                </div>
-            </a>
-            <div class="botonCirculoPequeño rojo"><img src="../Iconos/caret-right.svg" alt="" class="iconoPequeño"></div>
+            <div class="botonCirculoPequeño rojo" id='moverIzquierda'><img src="../Iconos/caret-left.svg" alt="" class="iconoPequeño"></div>
+            <div id="contenedorImagenes">
+                <a class="link actividad" href="busqueda.php">
+                    <div>
+                        <img src="../img/senderismo.jpg" alt="">
+                        <div class="textoSombra">Senderismo</div>
+                    </div>
+                </a>
+                <a class="link actividad" href="busqueda.php">
+                    <div>
+                        <img src="../img/montanismo.jpg" alt="">
+                        <div class="textoSombra">Montañismo</div>
+                    </div>
+                </a>
+                <a class="link actividad" href="busqueda.php">
+                    <div>
+                        <img src="../img/correr.jpg" alt="">
+                        <div class="textoSombra">Correr</div>
+                    </div>
+                </a>
+                <a class="link actividad" href="busqueda.php">
+                    <div>
+                        <img src="../img/ciclismo.jpg" alt="">
+                        <div class="textoSombra">Ciclismo</div>
+                    </div>
+                </a>
+            </div>
+            <div class="botonCirculoPequeño rojo" id='moverDerecha'><img src="../Iconos/caret-right.svg" alt="" class="iconoPequeño"></div>
         </div>
     </section>
 
@@ -161,6 +164,39 @@
     </section>
 
     <section id="comentariosFalsos">
-
+        <h1>¿Qué dice la comunidad?</h1>
+        <div class="comentarioFalso">
+            <img src="../img/pexels-anastasia-shuraeva-8926952.jpg" alt="">
+            <div class="azul">
+                Una app imprescindible e imperdible que utilizo todos los días que estoy en la montaña
+                <br><br>
+                -Ricardo
+            </div>
+        </div>
+        <div class="comentarioFalso">
+            <img src="../img/pexels-kampus-production-7787401.jpg" alt="">
+            <div class="azul">
+                Gracias a esta app he descubierto la zona en la que llevo viviendo 20 años
+                <br><br>
+                -Elena
+            </div>
+        </div>
+        <div class="comentarioFalso">
+            <img src="../img/pexels-lan-yao-13102460.jpg" alt="">
+            <div class="azul">
+                Su sencillez es increíble, es todo lo que necesito para hacer rutas sin distracciones
+                <br><br>
+                -Eduardo
+            </div>
+        </div>
+        <div class="comentarioFalso">
+            <img src="../img/Looneytunes-roadrunner.webp" alt="">
+            <div class="azul">
+                ¡Meep! ¡Meep! (Mi app favorita nunca se me acaban las rutas y eso que las hago rápido)
+                <br><br>
+                -Correcaminos
+            </div>
+        </div>
     </section>
 </main>
+<script src="../js/desplazamientoImg.js"></script>

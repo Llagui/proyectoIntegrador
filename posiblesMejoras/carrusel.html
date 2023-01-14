@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="../carrousel/css/lightslider.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../carrousel/js/lightslider.js"></script>
+</head>
+
+<body>
+    <ul id="lightSlider">
+        <li>
+            <!-- <img src="img/senderismo.jpg" alt=""> -->
+            <p>Senderismo</p>
+        </li>
+        <li>
+            <!-- <img src="img/montanismo.jpg" alt=""> -->
+            <p>Montañismo</p>
+        </li>
+    </ul>
+    <script>
+        $(document).ready(function () {
+            $('#responsive').lightSlider({
+                item: 4,
+                loop: false,
+                slideMove: 2,
+                easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+                speed: 600,
+                responsive: [
+                    {
+                        breakpoint: 800,
+                        settings: {
+                            item: 3,
+                            slideMove: 1,
+                            slideMargin: 6,
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            item: 2,
+                            slideMove: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+
+</html>

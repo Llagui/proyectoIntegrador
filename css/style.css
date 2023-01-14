@@ -20,7 +20,7 @@ section {
 }
 
 h1 {
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .link {
@@ -28,9 +28,9 @@ h1 {
     text-decoration: none;
 }
 
-/*
-LOGO
-*/
+/*****************
+ *             LOGO
+ ****************/
 .logo {
     position: relative;
     top: 15px;
@@ -51,9 +51,9 @@ LOGO
     height: 50px;
 }
 
-/*
-Colores
-*/
+/*****************
+ *             Colores
+ ****************/
 .azul {
     background-color: #BFEFFF;
 }
@@ -70,9 +70,9 @@ Colores
     background-color: #000000;
 }
 
-/*
-Elementos reutilizables
-*/
+/*****************
+ *             Elementos reutilizables
+ ****************/
 .boton {
     width: 200px;
     height: 40px;
@@ -95,18 +95,9 @@ Elementos reutilizables
     justify-content: center;
 }
 
-/* .botonCirculoGrande {
-    width: 200px;
-    height: 40px;
-    border-radius: 20px;
-    border: 0;
-    align-items: center;
-    font-size: 400;
-} */
-
 .botonCirculoPequeño:hover,
-/* .botonCirculoGrande:hover, */
-.boton:hover {
+.boton:hover,
+#circulo:hover {
     cursor: pointer;
 }
 
@@ -115,9 +106,23 @@ Elementos reutilizables
     width: 25px;
 }
 
-/*
-Elementos header
-*/
+#circulo {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px 0 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    float: left;
+    border: 0;
+}
+
+
+
+/*****************
+ *             Header
+ ****************/
 header {
     padding: 0 50px;
     position: sticky;
@@ -136,14 +141,13 @@ header {
     font-weight: 400;
 }
 
-/* 
-Elementos footer
-*/
+/*****************
+ *             Footer
+ ****************/
 footer {
     padding: 0 50px;
     padding-bottom: 25px;
     position: relative;
-    /* bottom: 0; */
     margin-top: 10px;
     width: calc(100% - 100px);
     height: 350px;
@@ -153,7 +157,6 @@ footer {
     align-items: start;
     grid-auto-rows: minmax(0px, auto);
     justify-items: center;
-    /* grid-auto-rows: ; */
     z-index: 1;
 }
 
@@ -185,7 +188,6 @@ footer .logo {
     grid-row: 2;
 }
 
-/* Añadir cada vez mas espaciado */
 #segundaColumna {
     color: #ffffff;
     grid-column: 2;
@@ -193,7 +195,6 @@ footer .logo {
 }
 
 #terceraColumna {
-    /* margin: 0; */
     color: #ffffff;
     grid-column: 3;
     grid-row: 2;
@@ -218,7 +219,7 @@ footer .logo {
     font-weight: 500;
 }
 
-/* Media query si pantalla pequeña */
+/* Media query footer */
 @media (min-width: 440px) and (max-width: 600px) {
     #inicioSesion span {
         display: none;
@@ -323,9 +324,9 @@ footer .logo {
     }
 }
 
-/*
-Pagina inicial
-*/
+/*****************
+ *             Pagina principal
+ ****************/
 #fondoBusqueda {
     height: calc(100vh - 80px);
     width: 100%;
@@ -352,24 +353,6 @@ Pagina inicial
     border: 0;
     padding: 0;
     padding-left: 10px;
-}
-
-#circulo {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px 0 0 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    float: left;
-    /* margin-left: -50px; */
-    border: 0;
-
-}
-
-#circulo:hover {
-    cursor: pointer;
 }
 
 #lupa {
@@ -453,10 +436,16 @@ Pagina inicial
 }
 
 /* Seccion rutas actividades */
-#actividades {
+#actividades,
+#contenedorImagenes {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+
+}
+
+#contenedorImagenes {
+    width: 90%;
 }
 
 .actividad {
@@ -487,26 +476,25 @@ Pagina inicial
     align-items: center;
 }
 
-/* @media (min-width: 440px) and (max-width: 600px) */
 @media (max-width: 1000px) {
-    #actividades a:nth-child(5) {
+    #contenedorImagenes a:nth-child(4) {
         display: none;
     }
 }
 
 @media (max-width: 800px) {
-    #actividades a:nth-child(4) {
+    #contenedorImagenes a:nth-child(3) {
         display: none;
     }
 }
 
 @media (max-width: 600px) {
-    #actividades a:nth-child(3) {
+    #contenedorImagenes a:nth-child(2) {
         display: none;
     }
 }
 
-/* Venta 1 */
+/* Seccion Venta 1 */
 #venta1 {
     padding: 0 0 0 50px;
     position: relative;
@@ -514,6 +502,7 @@ Pagina inicial
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
+    margin-top: 40px;
 }
 
 #venta1 .spanDeSpans {
@@ -545,7 +534,7 @@ Pagina inicial
 
 }
 
-/* Venta 2 */
+/* Seccion Venta 2 */
 #venta2 {
     padding: 0 50px 0 0;
     position: relative;
@@ -595,7 +584,7 @@ Pagina inicial
     }
 }
 
-/* Caracteristicas */
+/* Seccion Caracteristicas */
 #caracteristicas {
     margin-top: 100px;
     display: grid;
@@ -639,6 +628,72 @@ Pagina inicial
     #caracteristicas:thrid-child {
         grid-column: 1;
         grid-row: 3;
+    }
+}
+
+/* Seccion comentarios falsos */
+.comentarioFalso img {
+    border: 1px solid;
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    object-position: 100% 20%;
+}
+
+.comentarioFalso div {
+    padding: 20px 50px;
+    position: relative;
+    float: right;
+    height: 160px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    width: calc(100% - 350px);
+}
+
+.comentarioFalso {
+    margin: 20px 0;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+}
+
+#comentariosFalsos {
+    margin-bottom: 50px;
+}
+
+@media (max-width: 800px) {
+    .comentarioFalso div {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 650px) {
+    .comentarioFalso img {
+        height: 150px;
+        width: 150px;
+    }
+
+    .comentarioFalso div {
+        height: fit-content;
+        width: calc(100% - 275px);
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .comentarioFalso img {
+        height: 100px;
+        width: 100px;
+    }
+
+    .comentarioFalso div {
+        height: fit-content;
+        width: calc(100% - 175px);
+        padding: 20px 25px;
     }
 }
 
