@@ -118,7 +118,32 @@ h1 {
     border: 0;
 }
 
+.imgFondoDerecha {
+    height: calc(100vh - 80px);
+    width: 50%;
+    object-fit: cover;
+    display: flex;
+    float: right;
+    object-position: 70% 0;
+}
 
+.imgFondoIzquierda {
+    height: calc(100vh - 80px);
+    width: 50%;
+    object-fit: cover;
+    display: block;
+    float: left;
+    object-position: 100%;
+}
+
+@media (max-width: 700px) {
+    .imgFondoDerecha {
+        display: none;
+    }
+    .imgFondoIzquierda {
+        width: 100%;
+    }
+}
 
 /*****************
  *             Header
@@ -141,6 +166,36 @@ header {
     font-weight: 400;
 }
 
+
+@media (min-width: 440px) and (max-width: 600px) {
+    #inicioSesion span {
+        display: none;
+    }
+
+    header .boton {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Media query header */
+
+@media (max-width: 440px) {
+    #inicioSesion span {
+        display: none;
+    }
+
+    header .boton {
+        width: 40px;
+        height: 40px;
+    }
+
+    header .logo span {
+        display: none;
+    }
+
+}
+
 /*****************
  *             Footer
  ****************/
@@ -148,7 +203,6 @@ footer {
     padding: 0 50px;
     padding-bottom: 25px;
     position: relative;
-    margin-top: 10px;
     width: calc(100% - 100px);
     height: 350px;
     display: grid;
@@ -220,33 +274,6 @@ footer .logo {
 }
 
 /* Media query footer */
-@media (min-width: 440px) and (max-width: 600px) {
-    #inicioSesion span {
-        display: none;
-    }
-
-    header .boton {
-        width: 40px;
-        height: 40px;
-    }
-}
-
-@media (max-width: 440px) {
-    #inicioSesion span {
-        display: none;
-    }
-
-    header .boton {
-        width: 40px;
-        height: 40px;
-    }
-
-    header .logo span {
-        display: none;
-    }
-
-}
-
 @media (min-width: 601px) and (max-width: 800px) {
     footer {
         /* height: 750px; */
@@ -321,6 +348,15 @@ footer .logo {
     #quintaColumna {
         grid-column: 2;
         grid-row: 6;
+    }
+}
+
+@media (max-width: 380px) {
+    footer {
+        margin: 0 auto;
+        width: 100%;
+        padding: 0;
+        gap: 0;
     }
 }
 
@@ -531,7 +567,6 @@ footer .logo {
 
 #venta2 .imgGrande {
     object-position: 100% 20%;
-
 }
 
 /* Seccion Venta 2 */
@@ -698,6 +733,44 @@ footer .logo {
 }
 
 
+/*****************
+ *             Pagina inicio de sesion
+ ****************/
+#formularioSesion {
+    position: absolute;
+    width: 300px;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+#formularioSesion p {
+    margin-bottom: 0;
+}
+
+#formularioSesion h1 {
+    text-align: center;
+}
+
+#formularioSesion a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.campo {
+    width: 100%;
+    border: 0;
+    height: 40px;
+    padding: 0;
+    border-radius: 20px;
+}
+
+#contenedor {
+    position: relative;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
 
 /* GIF trabajando */
 #trabajando {
