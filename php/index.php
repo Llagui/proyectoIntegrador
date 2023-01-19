@@ -16,7 +16,7 @@
     </div>
     <!-- <img src="../Iconos/wave.svg" style="margin-top: -250px;"> -->
     <section>
-        <h1>Rutas recomendadas</h1>
+        <h2>Rutas recomendadas</h2>
         <div id="rutasRecomendadas">
             <a class="link" href="detalleRuta.php">
                 <div id="rutaRecomendada">
@@ -78,9 +78,10 @@
             </a>
         </div>
     </section>
-
+    
     <section style="padding-bottom: 40px;">
-        <h1>¿Qué te apetece hacer?</h1>
+        <h2>¿Qué te apetece hacer?</h2>
+        <!-- Animar esto si tengo tiempo -->
         <div id="actividades">
             <div class="botonCirculoPequeño rojo" id='moverIzquierda'><img src="../Iconos/caret-left.svg" alt="" class="iconoPequeño"></div>
             <div id="contenedorImagenes">
@@ -124,7 +125,7 @@
     <section id="venta2" class="azul">
         <img src="../img/barbas.jpg" alt="" class="imgGrande">
         <span class="spanDeSpans">
-            <span class="tituloPequeño">Únete para disfrutar al aire libre sin <br> distrac<wbr>ciones</span><br><br>
+            <span class="tituloPequeño">Únete para disfrutar al aire libre sin distrac<wbr>ciones</span><br><br>
             <br><br>
             <div>
                 <div class="boton rojo">
@@ -146,25 +147,27 @@
     </section>
 
     <section id="caracteristicas">
+        <!-- <h2>¿Cómo funciona?</h2> -->
+        
         <div>
             <img src="../Iconos/fingerprint.svg" alt="" class="rojo">
-            <h1>Registrate</h1>
+            <h2>Registrate</h2>
             <p>Registra fácilmente tu rutas y compártelas con la comunidad</p>
         </div>
         <div>
             <img src="../Iconos/plus-lg.svg" alt="" class="rojo">
-            <h1>Crea</h1>
+            <h2>Crea</h2>
             <p>Convierte tus actividades en historias memorables</p>
         </div>
         <div>
             <img src="../Iconos/suit-heart-fill-black.svg" alt="" class="rojo">
-            <h1>Conecta</h1>
+            <h2>Conecta</h2>
             <p>Conoce nuevas rutas y compártelas con la comunidad</p>
         </div>
     </section>
 
     <section id="comentariosFalsos">
-        <h1>¿Qué dice la comunidad?</h1>
+        <h2>¿Qué dice la comunidad?</h2>
         <div class="comentarioFalso">
             <img src="../img/pexels-anastasia-shuraeva-8926952.jpg" alt="">
             <div class="azul">

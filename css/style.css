@@ -4,6 +4,10 @@ html {
     position: relative;
 }
 
+a {
+    text-decoration: none;
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -19,7 +23,7 @@ section {
     padding: 20px 50px;
 }
 
-h1 {
+h2 {
     font-size: 30px;
 }
 
@@ -49,6 +53,11 @@ h1 {
 .imagenLogo {
     width: 100px;
     height: 50px;
+}
+
+.enlaceLogo {
+    text-decoration: none;
+    color: #ffffff;
 }
 
 /*****************
@@ -140,9 +149,14 @@ h1 {
     .imgFondoDerecha {
         display: none;
     }
+
     .imgFondoIzquierda {
         width: 100%;
     }
+}
+
+.letraPequeña {
+    font-size: 5px;
 }
 
 /*****************
@@ -500,7 +514,7 @@ footer .logo {
 .textoSombra {
     position: relative;
     margin-top: -54px;
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 20px;
     background-color: #0000007d;
     height: 50px;
@@ -636,7 +650,7 @@ footer .logo {
     border-radius: 60px;
 }
 
-#caracteristicas h1 {
+#caracteristicas h2 {
     font-size: 30px;
 }
 
@@ -684,7 +698,7 @@ footer .logo {
     font-size: 25px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     border-radius: 20px;
     width: calc(100% - 350px);
 }
@@ -732,6 +746,28 @@ footer .logo {
     }
 }
 
+/* Menu sesion */
+
+#menu {
+    display: none;
+    height: fit-content;
+    width: fit-content;
+    margin: 10px;
+    padding: 10px;
+    position: absolute;
+    right: 30px;
+    top: 50px;
+    border-radius: 20px;
+}
+
+#menu button {
+    margin-bottom: 5px;
+}
+
+#inicioSesion:hover~#menu,
+#menu:hover{
+    display: block;
+}
 
 /*****************
  *             Pagina inicio de sesion
@@ -757,19 +793,73 @@ footer .logo {
 }
 
 .campo {
-    width: 100%;
+    width: calc(100% - 20px);
     border: 0;
     height: 40px;
     padding: 0;
+    margin-bottom: 10px;
     border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+#pag2 {
+    display: none;
+}
+
+/* #pag1,
+#pag2 {
+    height: 600px;
+} */
+#repitaContraseña {
+    border: #ffffff solid 2px;
 }
 
 #contenedor {
     position: relative;
     display: flex;
-
     align-items: center;
     justify-content: center;
+}
+
+#contenedor center {
+    margin-bottom: 10px;
+}
+
+/* #formularioSesion label{
+    border-top: 5px solid firebrick;
+} */
+#aficciones {
+    position: relative;
+    float: left;
+    margin-bottom: 25px;
+    margin-right: 20px;
+}
+
+.error {
+    margin-top: -8px;
+    background-color: red;
+    color: #ffffff;
+    width: 50%;
+    height: 15px;
+    font-size: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.seguridad {
+    margin-top: -8px;
+    background-color: #E07A75;
+    width: 50%;
+    height: 15px;
+    font-size: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
 }
 
 /* GIF trabajando */

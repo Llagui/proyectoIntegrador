@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+@session_start();
+@require_once("funcionesBD.php");
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -21,14 +25,55 @@
 
 <body>
     <header class="negro">
+
         <div class="logo">
-            <img src="../logos/image.png" class="imagenLogo">
-            <span>&nbsp;&nbsp;ROAD RUNNER</span>
+            <a href="../php/">
+                <img src="../logos/image.png" class="imagenLogo">
+            </a>
+            <a href="../php/" class="enlaceLogo">
+                <span>&nbsp;&nbsp;ROAD RUNNER</span>
+            </a>
         </div>
-        <a class="link" href="sesion.php">
+
+        <!-- Mi cuenta -->
+        <?php
+        if (isset($_SESSION['usuario'])) {
+        ?>
             <button id="inicioSesion" class="azul boton">
                 <img src="../iconos/person-fill.svg" class="iconoPequeño">
-                <span>&nbsp;&nbsp;Iniciar sesión</span>
+                <span id="cuenta">&nbsp;&nbsp;Mi cuenta</span>
             </button>
-        </a>
+        <?php
+        } else {
+        ?>
+            <a class="link" href="sesion.php">
+                <button id="inicioSesion" class="azul boton">
+                    <img src="../iconos/person-fill.svg" class="iconoPequeño">
+                    <span>&nbsp;&nbsp;Iniciar sesión</span>
+                </button>
+            </a>
+        <?php
+        }
+        ?>
+
+
+
+        <?php
+        if (isset($_SESSION['usuario'])) {
+        ?>
+            <div id="menu" class="azul">
+                <a href="edicionPerfil.php">
+                    <button class="boton rojo">Configuración</button>
+                </a>
+                <a href="misRutas.php">
+                    <button class="boton rojo">Mis rutas</button>
+                </a>
+                <form action="sesion.php" method="post">
+                    <input type="submit" value="Cerrar sesión" name='cerrarSesion' class="boton rojo">
+                </form>
+            </div>
+        <?php
+        }
+        ?>
+
     </header>

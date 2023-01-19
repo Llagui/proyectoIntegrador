@@ -1,9 +1,9 @@
 <footer class="negro">
-
-    <div class="logo">
+    <a href="../php/" class="logo">
         <img src="../logos/image.png" class="imagenLogo">
         <span>&nbsp;&nbsp;ROAD RUNNER</span>
-    </div>
+    </a>
+    <!-- 480 768 1200 -->
     <br><!-- Susutituir br por margin -->
     <div></div>
     <div id="primeraColumna">
@@ -59,9 +59,9 @@
         </ul>
     </div>
     <div id="cuartaColumna">
-        <span>Mapas</span> 
+        <span>Mapas</span>
         <span>Privacidad</span>
-        <span>Términos de uso</span> 
+        <span>Términos de uso</span>
     </div>
     <div id="quintaColumna">
         © 2023 Road Runner S.L.
