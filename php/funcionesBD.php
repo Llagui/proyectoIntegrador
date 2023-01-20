@@ -72,3 +72,23 @@ function getIDWithUser(string $usuario)
     }
     return $user[0]['idUsuario'];
 }
+
+// function getUsernames()
+// {
+//     $user = false;
+//     try {
+//         $connect = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
+//         $sql = "SELECT usuario FROM usuarios";
+//         $result = mysqli_query($connect, $sql);
+//         if (mysqli_affected_rows($connect) > 0) {
+//             $user = array();
+//             while ($register = mysqli_fetch_assoc($result)) {
+//                 $user[] = $register;
+//             }
+//         }
+//         mysqli_close($connect);
+//     } catch (mysqli_sql_exception $e) {
+//         $user = false;
+//     }
+//     return $user;
+// }

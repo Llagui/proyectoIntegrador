@@ -2,7 +2,7 @@
     <img src="../img/pexels-suliman-sallehi-1822461.jpg" alt="" class="imgFondoIzquierda">
 
     <div class="azul" id="formularioSesion">
-        <form action="registro.php" method="post">
+        <form action="registro.php" method="post" id="formularioRegistro">
             <div id="pag1">
                 <h1>Registrate hoy para empezar a planificar tu próxima aventura</h1>
                 <label for="nombre">Nombre completo</label><br>
@@ -25,6 +25,7 @@
                         <progress id="file" max="100" value="0" id="progresoContraseña"> </progress> 
                     -->
                 </div>
+                <div id="errorContraseña"></div>
 
                 <label for="repitaContraseña">Repita la contraseña</label><br>
                 <input type="password" name="repitaContraseña" id="repitaContraseña" class="campo" disabled><br>
@@ -67,32 +68,33 @@
 
                 <center>
                     <br><br>
-                    <input type="submit" value="Registrarse" class="boton rojo" name="registro">
+                    <input type="submit" value="Registrarse" class="boton rojo" name="registro" id='registro'>
                     <p><a href="sesion.php">Volver</a></p>
                 </center>
 
             </div>
-            <?php
-            if (isset($_REQUEST['registro'])) {
-                if (addUser($_REQUEST['datos'])) {
-                    $_SESSION['usuario'] = array(
-                        'usuario' => $_REQUEST['datos']['usuario'],
-                        'id' => getIDWithUser($_REQUEST['datos']['usuario']),
-                    );
-            ?>
-                    <script>
-                        window.location = "index.php";
-                    </script>
-            <?php
-                } else {
-                    //Mensaje de insercion incorrecta
-                    echo "<center><p>Registro erroneo</p></center>";
-                }
-            }
-            ?>
+            <!-- <?php
+            // if (isset($_REQUEST['registro'])) {
+            //     if (addUser($_REQUEST['datos'])) {
+            //         $_SESSION['usuario'] = array(
+            //             'usuario' => $_REQUEST['datos']['usuario'],
+            //             'id' => getIDWithUser($_REQUEST['datos']['usuario']),
+            //         );
+            // ?>
+            //         <script>
+            //             window.location = "index.php";
+            //         </script>
+            // <?php
+            //     } else {
+            //         //Mensaje de insercion incorrecto
+            //         echo "<center><p>Registro erroneo</p></center>";
+            //     }
+            // }
+            ?> -->
         </form>
     </div>
     <img src="../img/pexels-lan-yao-13103876.jpg" alt="" class="imgFondoDerecha">
 </main>
-<script src="../js/contraseñas.js"></script>
+<script src="../js/seguridadContraseña.js"></script>
 <script src="../js/comprobarCampos.js"></script>
+<script src="../js/botonesRegistro.js"></script>

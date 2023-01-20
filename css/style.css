@@ -378,7 +378,7 @@ footer .logo {
  *             Pagina principal
  ****************/
 #fondoBusqueda {
-    height: calc(100vh - 80px);
+    height: calc(85vh - 80px);
     width: 100%;
     background-image: url('../img/fondoBusqueda.jpg');
     background-repeat: no-repeat;
@@ -387,7 +387,7 @@ footer .logo {
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    /* object-position: 50% 10%; */
+    background-position: 40% 45%;
 }
 
 #busqueda {

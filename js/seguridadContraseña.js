@@ -8,7 +8,6 @@ inputContraseña.addEventListener("input", () =>{
     let seguridadContraseña = 0;
     
     //Valoracion contraseñas segun contenido
-    console.log(hasLowerLetter(contraseña));
     seguridadContraseña += hasLowerLetter(contraseña) ? 1 : 0;
     seguridadContraseña += hasUpperLetter(contraseña) ? 1 : 0;
     seguridadContraseña += hasDigit(contraseña) ? 1 : 0;
@@ -30,17 +29,6 @@ inputContraseña.addEventListener("input", () =>{
     }else{
         contraseñaRepetida.disabled = false;
         document.getElementById("seguridadContraseña").classList.add('seguridad');
-    }
-});
-
-contraseñaRepetida.addEventListener("change", () => {
-    let error = document.getElementById('coincidenciaContraseñas');
-    if (contraseñaRepetida.value != contraseña.value) {
-        error.textContent = 'Las contraseñas no coinciden';
-        error.classList.add('error');
-    } else {
-        error.textContent = '';
-        error.classList.remove('error');
     }
 });
 

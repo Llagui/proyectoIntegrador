@@ -1,44 +1,105 @@
 let nombre = document.getElementById('nombre');
 let errorNombre = document.getElementById('errorNombre');
-nombre.addEventListener("change", () => {
-    if (nombre.value != '') {
+nombre.addEventListener("input", nombreError);
+function nombreError() {
+    let errorEnNombre = false;
+    if (nombre.value == '') {
+        errorNombre.classList.add('error');
+        errorNombre.textContent = 'El nombre es obligatorio';
+        errorEnNombre = true;
+    } else {
         errorNombre.classList.remove('error');
         errorNombre.textContent = '';
     }
-});
+    return errorEnNombre;
+}
 
 let usuario = document.getElementById('usuario');
 let errorUsuario = document.getElementById('errorUsuario');
-usuario.addEventListener("change", () => {
-    if (usuario.value != '') {
+usuario.addEventListener("input", usuarioError);
+function usuarioError() {
+    let errorEnUsuario = false;
+    if (usuario.value == '') {
+        errorUsuario.classList.add('error');
+        errorUsuario.textContent = 'El usuario es obligatorio';
+        errorEnUsuario = true;
+    } else {
+        // Saltar error si el usuario esta (nombre usuario ocupado)
+        // let nombresUsuarios = ;
+        // fetch('http://localhost/proyecto Integrador/roadrunner/usuarios/nombreUsuarios/')
+        //     .then((response) => response.json())
+        //     .then(function (json) {
+        //         console.log(json);
+        //     })
+        //     .catch((error) => console.log(error));
         errorUsuario.classList.remove('error');
         errorUsuario.textContent = '';
     }
-});
+    return errorEnUsuario;
+}
+
 
 let correo = document.getElementById('correo');
 let errorCorreo = document.getElementById('errorCorreo');
-correo.addEventListener("change", () => {
-    if (correo.value.toLowerCase()
+correo.addEventListener("input", correoError);
+function correoError() {
+    let errorEnCorreo = false;
+    if (correo.value == '') {
+        errorCorreo.classList.add('error');
+        errorCorreo.textContent = 'El correo es obligatorio';
+        errorEnCorreo = true;
+    } else if (correo.value.toLowerCase()
         .match(
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )) {
-    errorCorreo.classList.remove('error');
-    errorCorreo.textContent = "";
-} else {
-    errorCorreo.classList.add('error');
-    errorCorreo.textContent = "Error en el email";
+        errorCorreo.classList.remove('error');
+        errorCorreo.textContent = "";
+    } else {
+        errorCorreo.classList.add('error');
+        errorCorreo.textContent = "Email incorrecto";
+    }
+    return errorEnCorreo;
 }
-});
+
 
 let contraseña = document.getElementById('contraseña');
-let errorContraseña = document.getElementById('seguridadContraseña');
-contraseña.addEventListener("change", () => {
+let errorContraseña = document.getElementById('errorContraseña');
+contraseña.addEventListener("input", contraseñaError);
+function contraseñaError() {
+    let errorEnContraseña = false;
     if (contraseña.value == '') {
+        errorContraseña.classList.add('error');
+        errorContraseña.textContent = 'La contraseña es obligatoria';
+        errorEnContraseña = true;
+    } else {
         errorContraseña.classList.remove('error');
         errorContraseña.textContent = '';
     }
-});
+    return errorEnContraseña;
+}
+
+let coincidenciaContraseñas = document.getElementById('coincidenciaContraseñas');
+let contraseñaRepe = document.getElementById("repitaContraseña");
+contraseñaRepe.addEventListener("input", contraseñaRepetidaError);
+function contraseñaRepetidaError() {
+    let errorEnContraRepe = false;
+    if (contraseñaRepe.value == '') {
+        coincidenciaContraseñas.classList.add('error');
+        coincidenciaContraseñas.textContent = 'Vuelve a poner la contraseña';
+        errorEnContraRepe = true;
+    } else {
+        if (contraseñaRepe.value != contraseña.value) {
+            coincidenciaContraseñas.textContent = 'Las contraseñas no coinciden';
+            coincidenciaContraseñas.classList.add('error');
+            errorEnContraRepe = true;
+        } else {
+            coincidenciaContraseñas.textContent = '';
+            coincidenciaContraseñas.classList.remove('error');
+        }
+    }
+    return errorEnContraRepe;
+}
+
 
 // PAGINA 2
 let estatura = document.getElementById('estatura');
@@ -77,40 +138,3 @@ fecha.addEventListener("change", () => {
         errorFecha.textContent = '';
     }
 });
-
-document.getElementById('continuar').addEventListener('click', continuar)
-function continuar(e) {
-    e.preventDefault();
-    let camposRellenados = true;
-    if (document.getElementById('nombre').value == '') {
-        errorNombre.classList.add('error');
-        errorNombre.textContent = 'El nombre es obligatorio';
-        camposRellenados = false;
-    }
-    if (document.getElementById('usuario').value == '') {
-        errorUsuario.classList.add('error');
-        errorUsuario.textContent = 'El usuario es obligatorio';
-        camposRellenados = false;
-    }
-    if (document.getElementById('correo').value == '') {
-        errorCorreo.classList.add('error');
-        errorCorreo.textContent = 'El correo es obligatorio';
-        camposRellenados = false;
-    }
-
-    if (document.getElementById('contraseña').value == '') {
-        errorContraseña.classList.add('error');
-        errorContraseña.textContent = 'La contraseña es obligatoria';
-        camposRellenados = false;
-    }
-    if (document.getElementById("repitaContraseña").value == '') {
-        document.getElementById('coincidenciaContraseñas').classList.add('error');
-        document.getElementById('coincidenciaContraseñas').textContent = 'Vuelve a poner la contraseña';
-        camposRellenados = false;
-    }
-
-    if (camposRellenados) {
-        document.getElementById('pag1').style = 'display:none;'
-        document.getElementById('pag2').style = 'display:block;'
-    }
-}

@@ -2,7 +2,7 @@
     <center>
         <br>
         <br>
-        <h1>Pagina Busqueda</h1>
+        <h1>Configuracion perfil</h1>
         <h2>Estoy trabajado en ello</h2>
         <img src="../img/computer-drinking.gif" id="trabajando">
         <br>
