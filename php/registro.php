@@ -53,17 +53,17 @@
 
                 <label for="actividades">Actividades favoritas</label><br>
                 <div id="aficciones">
-                    <input type="hidden" name="datos[senderismo]" value="0">
-                    <input type="checkbox" name="datos[senderismo]" value="1"> Senderismo<br>
-                    <input type="hidden" name="datos[ciclismo]" value="0">
-                    <input type="checkbox" name="datos[ciclismo]" value="1"> Ciclismo<br>
+                    <!-- <input type="hidden" name="datos[senderismo]" value="0"> -->
+                    <input type="checkbox" name="datos[senderismo]" id="senderismo"> Senderismo<br>
+                    <!-- <input type="hidden" name="datos[ciclismo]" value="0"> -->
+                    <input type="checkbox" name="datos[ciclismo]" id="ciclismo"> Ciclismo<br>
 
                 </div>
                 <div id="aficciones">
-                    <input type="hidden" name="datos[montañismo]" value="0">
-                    <input type="checkbox" name="datos[montañismo]" value="1"> Montañismo<br>
-                    <input type="hidden" name="datos[correr]" value="0">
-                    <input type="checkbox" name="datos[correr]" value="1"> Correr<br>
+                    <!-- <input type="hidden" name="datos[montañismo]" value="0"> -->
+                    <input type="checkbox" name="datos[montañismo]" id="montañismo"> Montañismo<br>
+                    <!-- <input type="hidden" name="datos[correr]" value="0"> -->
+                    <input type="checkbox" name="datos[correr]" id="correr"> Correr<br>
                 </div>
 
                 <center>
@@ -96,5 +96,4 @@
     <img src="../img/pexels-lan-yao-13103876.jpg" alt="" class="imgFondoDerecha">
 </main>
 <script src="../js/seguridadContraseña.js"></script>
-<script src="../js/comprobarCampos.js"></script>
-<script src="../js/botonesRegistro.js"></script>
+<script src="../js/registro.js"></script>

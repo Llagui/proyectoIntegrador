@@ -17,6 +17,7 @@ function nombreError() {
 let usuario = document.getElementById('usuario');
 let errorUsuario = document.getElementById('errorUsuario');
 usuario.addEventListener("input", usuarioError);
+// usuario.addEventListener("change", usuarioCogido);
 function usuarioError() {
     let errorEnUsuario = false;
     if (usuario.value == '') {
@@ -25,8 +26,7 @@ function usuarioError() {
         errorEnUsuario = true;
     } else {
         // Saltar error si el usuario esta (nombre usuario ocupado)
-        // let nombresUsuarios = ;
-        // fetch('http://localhost/proyecto Integrador/roadrunner/usuarios/nombreUsuarios/')
+        // fetch(`http://localhost/api/checkuser?name=${usuario.value}`)
         //     .then((response) => response.json())
         //     .then(function (json) {
         //         console.log(json);
@@ -127,7 +127,7 @@ peso.addEventListener("change", () => {
 });
 
 let fecha = document.getElementById('fecha');
-let errorFecha = document.getElementById('errorPeso');
+let errorFecha = document.getElementById('errorFecha');
 fecha.addEventListener("change", () => {
     let fechaNacimiento = new Date(fecha.value);
     if (fechaNacimiento < Date('01/01/1900') || fechaNacimiento > Date.now()) {
@@ -136,5 +136,66 @@ fecha.addEventListener("change", () => {
     } else {
         errorFecha.classList.remove('error');
         errorFecha.textContent = '';
+    }
+});
+
+document.getElementById('continuar').addEventListener('click', continuar);
+document.getElementById('continuar').addEventListener('enter', continuar);
+function continuar(e) {
+    e.preventDefault();
+    //lo ejecuto una vez cada uno para que salga el mensaje de error
+    let errores = nombreError();
+    errores = usuarioError() || errores;
+    errores = correoError() || errores;
+    errores = contraseñaError() || errores;
+    errores = contraseñaRepetidaError() || errores;
+    if (!errores) {
+        document.getElementById('pag1').style = 'display:none;'
+        document.getElementById('pag2').style = 'display:block;'
+    }
+}
+
+document.getElementById('registro').addEventListener('click', registrar)
+function registrar(e) {
+    e.preventDefault();
+    //crear objeto para pasar 
+    let actividades = '';
+    actividades += document.getElementById('senderismo').checked ? 'senderismo' : '';
+    actividades += document.getElementById('montañismo').checked ? 'montañismo' : '';
+    actividades += document.getElementById('ciclismo').checked ? 'ciclismo' : '';
+    actividades += document.getElementById('correr').checked ? 'correr' : '';
+
+    let elementos = {
+        "fullname": nombre.value,
+        "username": usuario.value,
+        "email": correo.value,
+        "pass": contraseña.value,
+        "height": estatura.value,
+        "weight": peso.value,
+        "birthday": fecha.value,
+        "activities": actividades,
+
+    };
+    // 'senderismo': document.getElementById('senderismo').checked,
+    // 'montañismo': document.getElementById('montañismo').checked,
+    // 'ciclismo': document.getElementById('ciclismo').checked,
+    // 'correr': document.getElementById('correr').checked,
+    console.log(JSON.stringify(elementos));
+    // fetch('http://localhost:3000/api/register', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json;charset=utf-8'
+    //     },
+    //     body: JSON.stringify(elementos)
+    // }).then((response) => console.log(response))
+    //     .then(function (json) {
+    //         console.log(json.results);
+    //     })
+    //     .catch((error) => console.log(error));
+}
+
+document.getElementById('formularioRegistro').addEventListener('keypress', (e) => {
+    if (e.key == 'Enter') {
+        e.preventDefault();
     }
 });

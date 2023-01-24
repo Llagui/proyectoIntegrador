@@ -26,6 +26,9 @@ section {
 h2 {
     font-size: 30px;
 }
+main{
+    min-height: calc(100vh - 80px);
+}
 
 .link {
     color: black;
@@ -400,6 +403,7 @@ footer .logo {
     border-radius: 0 25px 25px 0;
     font-size: 20px;
     color: #000000b1;
+    float: left;
     border: 0;
     padding: 0;
     padding-left: 10px;
@@ -765,7 +769,7 @@ footer .logo {
 }
 
 #inicioSesion:hover~#menu,
-#menu:hover{
+#menu:hover {
     display: block;
 }
 
@@ -779,14 +783,16 @@ footer .logo {
     border-radius: 20px;
 }
 
-#formularioSesion p {
-    margin-bottom: 0;
+#formularioCambios p {
+    margin: 0;
 }
 
+#formularioCambios h1,
 #formularioSesion h1 {
     text-align: center;
 }
 
+#formularioCambios a,
 #formularioSesion a {
     text-decoration: none;
     color: #000000;
@@ -808,10 +814,6 @@ footer .logo {
     display: none;
 }
 
-/* #pag1,
-#pag2 {
-    height: 600px;
-} */
 #repitaContraseña {
     border: #ffffff solid 2px;
 }
@@ -827,9 +829,6 @@ footer .logo {
     margin-bottom: 10px;
 }
 
-/* #formularioSesion label{
-    border-top: 5px solid firebrick;
-} */
 #aficciones {
     position: relative;
     float: left;
@@ -852,7 +851,7 @@ footer .logo {
 
 .seguridad {
     margin-top: -8px;
-    background-color: #E07A75;
+    color: white;
     width: 50%;
     height: 15px;
     font-size: 10px;
@@ -861,6 +860,184 @@ footer .logo {
     justify-content: center;
     margin-bottom: 5px;
 }
+
+
+/*****************
+ *             Pagina edicion Perfil
+ ****************/
+#formularioCambios {
+    position: absolute;
+    padding: 25px;
+    border-radius: 20px;
+    /* min-width: 100%; */
+}
+
+#formularioCambios center {
+    padding-top: 30px;
+}
+
+#cambiosCuenta {
+    display: grid;
+    grid-template-columns: repeat(3, 160px);
+    grid-template-rows: repeat(6, 50px);
+    gap: 15px;
+    max-height: 80%;
+}
+
+.imagenPerfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+    border: solid 2px;
+    grid-column: 1;
+    grid-row: 1/7;
+    justify-self: center;
+    background-color: #ffffff;
+}
+
+.imagenPerfil img {
+    width: 100%;
+    height: 100%;
+}
+
+.imagenPerfil .file {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: #212529b8;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0 20px;
+
+}
+
+.imagenPerfil .file input {
+    position: absolute;
+    display: block;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+#cambioNombre {
+    grid-column: 2/4;
+    grid-row: 1;
+}
+
+#cambioUsuario {
+    grid-column: 2/4;
+    grid-row: 2;
+}
+
+#cambioActividades {
+    grid-column: 2/4;
+    grid-row: 6;
+    justify-self: center;
+}
+
+#eliminar {
+    font-size: 15px;
+    width: 160px;
+}
+
+#ventanaEliminar {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #0000009e;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+}
+
+#ventanaEliminar .azul {
+    position: relative;
+    border-radius: 20px;
+    width: 300px;
+    padding: 20px;
+    z-index: 2;
+}
+
+@media (max-width: 625px) {
+    #cambioNombre {
+        grid-column: 2;
+    }
+
+    #cambioUsuario {
+        grid-column: 2;
+    }
+
+    .imagenPerfil {
+        grid-row: 1/3;
+    }
+
+    #cambioActividades {
+        grid-column: 1/3;
+    }
+
+    #cambiosCuenta {
+        grid-template-columns: repeat(2, 160px);
+    }
+
+    .imagenPerfil {
+        width: 125px;
+        height: 125px;
+    }
+
+    #formularioCambios {
+        padding: 20px;
+    }
+}
+
+@media (max-height: 830px) {
+    #formularioCambios {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-height: 690px) {
+    #formularioCambios {
+        transform: scale(0.7);
+    }
+}
+
+/*****************
+ *             Pagina buaqueda ruta
+ ****************/
+#barraBusqueda {
+    position: absolute;
+    width: calc(100% - 20px);
+    padding: 10px;
+    display: flex;
+}
+
+#barraBusqueda #busqueda {
+    width: 20vw;
+}
+
+#mapa{
+    position: relative;
+    float: right;
+    height: 80vh;
+    width: 50vw;
+}
+
+#formularioBusqueda{
+    width: 100%;
+}
+#formularioBusqueda div{
+    display: flex;
+    width: 100%;
+}
+
+
+
 
 /* GIF trabajando */
 #trabajando {

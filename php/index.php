@@ -14,7 +14,6 @@
         </form>
 
     </div>
-    <!-- <img src="../Iconos/wave.svg" style="margin-top: -250px;"> -->
     <section>
         <h2>Rutas recomendadas</h2>
         <div id="rutasRecomendadas">
