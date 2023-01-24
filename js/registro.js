@@ -181,17 +181,23 @@ function registrar(e) {
     // 'ciclismo': document.getElementById('ciclismo').checked,
     // 'correr': document.getElementById('correr').checked,
     console.log(JSON.stringify(elementos));
-    // fetch('http://localhost:3000/api/register', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json;charset=utf-8'
-    //     },
-    //     body: JSON.stringify(elementos)
-    // }).then((response) => console.log(response))
-    //     .then(function (json) {
-    //         console.log(json.results);
-    //     })
-    //     .catch((error) => console.log(error));
+    fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(elementos)
+    }).then((response) => {
+        switch (response.status) {
+            case 200:
+                console.log('Usuario registrado con exito');
+                break;
+        
+            case 400:
+                console.log('Error');
+        }
+        return response.json()
+    }).then(data => console.log(data));
 }
 
 document.getElementById('formularioRegistro').addEventListener('keypress', (e) => {
