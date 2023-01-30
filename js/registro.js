@@ -17,26 +17,31 @@ function nombreError() {
 let usuario = document.getElementById('usuario');
 let errorUsuario = document.getElementById('errorUsuario');
 usuario.addEventListener("input", usuarioError);
-// usuario.addEventListener("change", usuarioCogido);
 function usuarioError() {
     let errorEnUsuario = false;
     if (usuario.value == '') {
         errorUsuario.classList.add('error');
         errorUsuario.textContent = 'El usuario es obligatorio';
         errorEnUsuario = true;
+        return errorEnUsuario;
     } else {
-        // Saltar error si el usuario esta (nombre usuario ocupado)
-        // fetch(`http://localhost/api/checkuser?name=${usuario.value}`)
-        //     .then((response) => response.json())
-        //     .then(function (json) {
-        //         console.log(json);
-        //     })
-        //     .catch((error) => console.log(error));
         errorUsuario.classList.remove('error');
         errorUsuario.textContent = '';
+        return fetch(`http://localhost:3000/api/checkuser?username=${usuario.value}`)
+        .then((response) => response.json())
+        .then(function (data) {
+            console.log(data);
+            if (data['exists']) {
+                errorUsuario.textContent = 'El usuario ya existe';
+                errorUsuario.classList.add('error');
+                errorEnUsuario = true;
+            }
+            console.log(errorEnUsuario);
+        })
+        .then(() => errorEnUsuario)
     }
-    return errorEnUsuario;
 }
+
 
 
 let correo = document.getElementById('correo');
@@ -107,7 +112,7 @@ let errorEstatura = document.getElementById('errorEstatura');
 estatura.addEventListener("change", () => {
     if (estatura.value < 100 || estatura.value > 230) {
         errorEstatura.classList.add('error');
-        errorEstatura.textContent = 'Estatura incorrecta';
+        errorEstatura.textContent = 'Altura errónea';
     } else {
         errorEstatura.classList.remove('error');
         errorEstatura.textContent = '';
@@ -119,7 +124,7 @@ let errorPeso = document.getElementById('errorPeso');
 peso.addEventListener("change", () => {
     if (peso.value < 50 || peso.value > 180) {
         errorPeso.classList.add('error');
-        errorPeso.textContent = 'Peso incorrecta';
+        errorPeso.textContent = 'Peso incorrecto';
     } else {
         errorPeso.classList.remove('error');
         errorPeso.textContent = '';
@@ -155,8 +160,11 @@ function continuar(e) {
     }
 }
 
-document.getElementById('registro').addEventListener('click', registrar)
+document.getElementById('registro').addEventListener('click', registrar);
+let errorFormulario = document.getElementById('errorFormulario');
 function registrar(e) {
+    errorFormulario.classList.remove('errorGrande');
+    errorFormulario.textContent = '';
     e.preventDefault();
     //crear objeto para pasar 
     let actividades = '';
@@ -174,30 +182,32 @@ function registrar(e) {
         "weight": peso.value,
         "birthday": fecha.value,
         "activities": actividades,
-
     };
+
     // 'senderismo': document.getElementById('senderismo').checked,
     // 'montañismo': document.getElementById('montañismo').checked,
     // 'ciclismo': document.getElementById('ciclismo').checked,
     // 'correr': document.getElementById('correr').checked,
-    console.log(JSON.stringify(elementos));
+
+
     fetch('http://localhost:3000/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(elementos)
-    }).then((response) => {
-        switch (response.status) {
-            case 200:
-                console.log('Usuario registrado con exito');
-                break;
-        
-            case 400:
-                console.log('Error');
-        }
-        return response.json()
-    }).then(data => console.log(data));
+    }).then((response) => response.json())
+        .then(function (data) {
+            console.log(data.success);
+            if (data['success']) {
+                sessionStorage.setItem("usuario", usuario.value);
+                sessionStorage.setItem("id", data['id']);
+                window.location = "index.php";
+            } else {
+                errorFormulario.textContent = data['msg'];
+                errorFormulario.classList.add('errorGrande');
+            }
+        })
 }
 
 document.getElementById('formularioRegistro').addEventListener('keypress', (e) => {

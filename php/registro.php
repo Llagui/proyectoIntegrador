@@ -71,7 +71,7 @@
                     <input type="submit" value="Registrarse" class="boton rojo" name="registro" id='registro'>
                     <p><a href="sesion.php">Volver</a></p>
                 </center>
-
+                <div id="errorFormulario"></div>
             </div>
             <!-- <?php
             // if (isset($_REQUEST['registro'])) {

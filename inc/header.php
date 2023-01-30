@@ -35,45 +35,7 @@
             </a>
         </div>
 
-        <!-- Mi cuenta -->
-        <?php
-        if (isset($_SESSION['usuario'])) {
-        ?>
-            <button id="inicioSesion" class="azul boton">
-                <img src="../iconos/person-fill.svg" class="iconoPequeño">
-                <span id="cuenta">&nbsp;&nbsp;Mi cuenta</span>
-            </button>
-        <?php
-        } else {
-        ?>
-            <a class="link" href="sesion.php">
-                <button id="inicioSesion" class="azul boton">
-                    <img src="../iconos/person-fill.svg" class="iconoPequeño">
-                    <span>&nbsp;&nbsp;Iniciar sesión</span>
-                </button>
-            </a>
-        <?php
-        }
-        ?>
-
-
-
-        <?php
-        if (isset($_SESSION['usuario'])) {
-        ?>
-            <div id="menu" class="azul">
-                <a href="edicionPerfil.php">
-                    <button class="boton rojo">Configuración</button>
-                </a>
-                <a href="misRutas.php">
-                    <button class="boton rojo">Mis rutas</button>
-                </a>
-                <form action="sesion.php" method="post">
-                    <input type="submit" value="Cerrar sesión" name='cerrarSesion' class="boton rojo">
-                </form>
-            </div>
-        <?php
-        }
-        ?>
-
+        <div id="inicioSesion">
+        </div>
     </header>
+    <script src="../js/menu.js"></script>

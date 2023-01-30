@@ -20,31 +20,33 @@
             <label for="contraseña">Contraseña</label><br>
             <input type="password" name="contraseña" id="contraseña" class="campo"><br><br>
             <center>
-                <input type="submit" value="Iniciar Sesión" class="boton rojo" name="inicio">
+                <input type="submit" value="Iniciar Sesión" class="boton rojo" name="inicio" id="botonSesion">
                 <p>
                     ¿No tienes cuenta? <br>
-                    <a href="registro.php">Registrate aquí</a>
+                    <a href="registro.php"><b>Registrate aquí</b></a>
                 </p>
             </center>
         </form>
-        <?php
-        if (isset($_REQUEST['inicio'])) {
-            if (validateUser($_REQUEST['usuario'], $_REQUEST['contraseña'])) {
-                $_SESSION['usuario'] = array(
-                    'usuario' => $_REQUEST['usuario'],
-                    'id' => getIDWithUser($_REQUEST['usuario']),
-                );
-        ?>
+        <!-- <?php
+                // if (isset($_REQUEST['inicio'])) {
+                //     if (validateUser($_REQUEST['usuario'], $_REQUEST['contraseña'])) {
+                //         $_SESSION['usuario'] = array(
+                //             'usuario' => $_REQUEST['usuario'],
+                //             'id' => getIDWithUser($_REQUEST['usuario']),
+                //         );
+                ?>
                 <script>
                     window.location = "index.php";
                 </script>
         <?php
-            } else {
-                echo "<center><p>Inicio de sesion erróneo</p></center>";
-            }
-        }
-        ?>
+        //     } else {
+        //         echo "<center><p>Inicio de sesion erróneo</p></center>";
+        //     }
+        // }
+        ?> -->
     </div>
     <img src="../img/pexels-lan-yao-13103876.jpg" alt="" class="imgFondoDerecha">
 
 </main>
+
+<script src="../js/sesion.js"></script>

@@ -26,7 +26,8 @@ section {
 h2 {
     font-size: 30px;
 }
-main{
+
+main {
     min-height: calc(100vh - 80px);
 }
 
@@ -162,6 +163,26 @@ main{
     font-size: 5px;
 }
 
+.errorGrande {
+    background-color: red;
+    color: #ffffff;
+    justify-self: center;
+    width: 50%;
+}
+
+.error {
+    margin-top: -8px;
+    background-color: red;
+    color: #ffffff;
+    width: 50%;
+    height: 15px;
+    font-size: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
 /*****************
  *             Header
  ****************/
@@ -182,7 +203,6 @@ header {
     top: 20px;
     font-weight: 400;
 }
-
 
 @media (min-width: 440px) and (max-width: 600px) {
     #inicioSesion span {
@@ -756,19 +776,20 @@ footer .logo {
     display: none;
     height: fit-content;
     width: fit-content;
-    margin: 10px;
-    padding: 10px;
+    border: 10px transparent solid;
+    padding: 10px; 
     position: absolute;
-    right: 30px;
-    top: 50px;
-    border-radius: 20px;
+     right: -20px;
+    /*top: 50px;*/
+    border-radius: 20px; 
+    background-clip: padding-box;
 }
 
 #menu button {
     margin-bottom: 5px;
 }
 
-#inicioSesion:hover~#menu,
+#inicioSesion:hover>#desplegable~#menu ,
 #menu:hover {
     display: block;
 }
@@ -836,19 +857,6 @@ footer .logo {
     margin-right: 20px;
 }
 
-.error {
-    margin-top: -8px;
-    background-color: red;
-    color: #ffffff;
-    width: 50%;
-    height: 15px;
-    font-size: 10px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 5px;
-}
-
 .seguridad {
     margin-top: -8px;
     color: white;
@@ -861,6 +869,11 @@ footer .logo {
     margin-bottom: 5px;
 }
 
+@media (max-height: 750px) {
+    #formularioSesion {
+        transform: scale(0.8);
+    }
+}
 
 /*****************
  *             Pagina edicion Perfil
@@ -1012,29 +1025,43 @@ footer .logo {
  ****************/
 #barraBusqueda {
     position: absolute;
-    width: calc(100% - 20px);
-    padding: 10px;
-    display: flex;
+    width: calc(100vw - 40px);
+    padding: 10px 20px;
 }
 
 #barraBusqueda #busqueda {
-    width: 20vw;
+    width: 30vw;
+    margin-left: 12.5px;
+    padding: 0;
 }
 
-#mapa{
+#formBusquedaPequeño {
+    width: calc(100% - 80px);
+    display: flex;
+}
+
+#mapa {
     position: relative;
     float: right;
     height: 80vh;
     width: 50vw;
 }
 
-#formularioBusqueda{
-    width: 100%;
+.scrollmenu {
+    border-left: 10px solid rgba(255, 255, 255, 0);
+    overflow: auto;
+    white-space: nowrap;
+    width: calc(75vw - 50px);
+    padding: 5px;
 }
-#formularioBusqueda div{
-    display: flex;
-    width: 100%;
+
+.scrollmenu select {
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
+    width: 150px;
 }
+
 
 
 
