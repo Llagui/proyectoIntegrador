@@ -18,14 +18,16 @@ if (sessionStorage.getItem('id') != null) {
 } else {
     document.getElementById('inicioSesion').innerHTML = `
     <a class="link" href="sesion.php">
-        <button class="azul boton">
+        <button class="azul boton" id="desplegable">
             <img src="../iconos/person-fill.svg" class="iconoPequeño">
             <span>&nbsp;&nbsp;Iniciar sesión</span>
         </button>
     </a>`;
 }
 
-document.getElementById('cerrarSesion').addEventListener('click', () => {
-    sessionStorage.clear();
-    window.location = '.';
-})
+if (document.getElementById('cerrarSesion') != null) {
+    document.getElementById('cerrarSesion').addEventListener('click', () => {
+        sessionStorage.clear();
+        window.location = '.';
+    })
+}

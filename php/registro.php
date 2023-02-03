@@ -73,24 +73,6 @@
                 </center>
                 <div id="errorFormulario"></div>
             </div>
-            <!-- <?php
-            // if (isset($_REQUEST['registro'])) {
-            //     if (addUser($_REQUEST['datos'])) {
-            //         $_SESSION['usuario'] = array(
-            //             'usuario' => $_REQUEST['datos']['usuario'],
-            //             'id' => getIDWithUser($_REQUEST['datos']['usuario']),
-            //         );
-            // ?>
-            //         <script>
-            //             window.location = "index.php";
-            //         </script>
-            // <?php
-            //     } else {
-            //         //Mensaje de insercion incorrecto
-            //         echo "<center><p>Registro erroneo</p></center>";
-            //     }
-            // }
-            ?> -->
         </form>
     </div>
     <img src="../img/pexels-lan-yao-13103876.jpg" alt="" class="imgFondoDerecha">

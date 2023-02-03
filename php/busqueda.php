@@ -2,45 +2,143 @@
 
     <div class="rojo" id="barraBusqueda">
         <!-- Vover a hacer el css -->
-        <form action="busqueda.php" method="post" id="formBusquedaPequeño">
-        <input type="submit" value="" class="azul " id="circulo">
-            <input type="image" src="../Iconos/search.svg" class="iconoPequeño" id="lupa">
-            <input id="busqueda">
+        <form action="#" method="post" id="formBusquedaPequeño">
+            <div id="buscar">
+                <input type="submit" value="" class="azul " id="circulo">
+                <input type="image" src="../Iconos/search.svg" class="iconoPequeño" id="lupa">
+                <input id="busqueda">
+            </div>
+
             <div class="scrollmenu">
-                <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
-
+                <select name="orden" id="orden" placeholder="" class="boton azul">
+                    <option value="" selected>Ordenar por</option>
                 </select>
-                <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
-
+                <select name="distancia" id="distancia" class="boton azul">
+                    <option value="" selected>Distancia</option>
                 </select>
-                <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
-
+                <select name="intensidad" id="intensidad" placeholder="Ordenar por" class="boton azul">
+                    <option value="" selected>Intensidad</option>
                 </select>
-                <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
-
+                <select name="tipo" id="tipo" class="boton azul">
+                    <option value="" selected>Tipo</option>
                 </select>
-                <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
-
+                <select name="desnivel" id="desnivel" placeholder="Ordenar por" class="boton azul">
+                    <option value="" selected>Desnivel</option>
                 </select>
-                <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
-
+                <select name="actividad por" id="actividad" placeholder="Ordenar por" class="boton azul">
+                    <option value="">Actividad</option>
                 </select>
-                <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
+                <!-- <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
 
-                </select>
-                <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
-
-                </select>
-                <select name="Ordenar por" id="" placeholder="Ordenar por" class="boton azul">
-
-                </select>
+                </select> -->
             </div>
         </form>
     </div>
 
 
     <div id="resultados">
-        <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23493.77808790753!2d-5.594900867892708!3d42.60363590515868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd379a9a0d5e1bd9%3A0x7d849ffad4f1eef3!2zTGXDs24!5e0!3m2!1ses!2ses!4v1674554722010!5m2!1ses!2ses" width="800" height="800" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="mapa"></iframe> -->
+        <div id="mapa"></div>
+        <div id="rutas">
+            <a class="link" href="detalleRuta.php">
+                <div class="rutaRecomendada" onclick="">
+                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
+                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
+                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
+
+                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
+                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
+
+                    <div class="caract1">
+                        <div>Distancia: 5km</div>
+                        <div>Intensidad: Media</div>
+                    </div>
+                    <div class="caract2">
+                        <div>Tipo: Circular</div>
+                        <div>Desnivel: 100m</div>
+                    </div>
+                </div>
+            </a>
+            <a class="link" href="detalleRuta.php">
+                <div class="rutaRecomendada" onclick="">
+                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
+                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
+                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
+
+                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
+                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
+
+                    <div class="caract1">
+                        <div>Distancia: 5km</div>
+                        <div>Intensidad: Media</div>
+                    </div>
+                    <div class="caract2">
+                        <div>Tipo: Circular</div>
+                        <div>Desnivel: 100m</div>
+                    </div>
+                </div>
+            </a>
+            <a class="link" href="detalleRuta.php">
+                <div class="rutaRecomendada" onclick="">
+                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
+                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
+                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
+
+                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
+                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
+
+                    <div class="caract1">
+                        <div>Distancia: 5km</div>
+                        <div>Intensidad: Media</div>
+                    </div>
+                    <div class="caract2">
+                        <div>Tipo: Circular</div>
+                        <div>Desnivel: 100m</div>
+                    </div>
+                </div>
+            </a>
+            <a class="link" href="detalleRuta.php">
+                <div class="rutaRecomendada" onclick="">
+                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
+                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
+                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
+
+                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
+                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
+
+                    <div class="caract1">
+                        <div>Distancia: 5km</div>
+                        <div>Intensidad: Media</div>
+                    </div>
+                    <div class="caract2">
+                        <div>Tipo: Circular</div>
+                        <div>Desnivel: 100m</div>
+                    </div>
+                </div>
+            </a>
+            <a class="link" href="detalleRuta.php">
+                <div class="rutaRecomendada" onclick="">
+                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
+                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
+                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
+
+                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
+                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
+
+                    <div class="caract1">
+                        <div>Distancia: 5km</div>
+                        <div>Intensidad: Media</div>
+                    </div>
+                    <div class="caract2">
+                        <div>Tipo: Circular</div>
+                        <div>Desnivel: 100m</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
     </div>
 
 </main>
+<script src="../js/mapa.js"></script>
+<script src="../js/buscar.js"></script>

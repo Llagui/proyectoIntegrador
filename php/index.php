@@ -1,15 +1,8 @@
 <main>
     <div id="fondoBusqueda">
-        <!-- <div id="busqueda">
-            <div class="azul" id="circulo"> <img src="../Iconos/search.svg" alt="" class="iconoPequeño"></div>
-            &nbsp;&nbsp;Encuentra tu próxima aventura 
-
-        </div> -->
         <form action="busqueda.php" method="post">
-            <!-- <input type="image" src="../Iconos/search.svg" alt="" class="azul iconoPequeño" id="circulo"> -->
-            <!-- <div class="azul" id="circulo"> <img src="../Iconos/search.svg" alt="" class="iconoPequeño"></div> -->
             <input type="submit" value="" class="azul " id="circulo">
-            <input type="image" src="../Iconos/search.svg" class="iconoPequeño" id="lupa">
+            <input type="image" src="../Iconos/search.svg" class="iconoPequeño" id="lupa" alt="lupa">
             <input id="busqueda" placeholder="Encuentra tu próxima aventura">
         </form>
 
@@ -18,13 +11,13 @@
         <h2>Rutas recomendadas</h2>
         <div id="rutasRecomendadas">
             <a class="link" href="detalleRuta.php">
-                <div id="rutaRecomendada">
+                <div class="rutaRecomendada">
                     <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
                     <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
                     <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
 
                     <div class="tituloPequeño titulo">Sendero de O Monte</div>
-                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" fill="#AB7C94" class="iconoPequeño">&nbsp;&nbsp;3214</div>
+                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt=""  class="iconoPequeño">&nbsp;&nbsp;3214</div>
                     <div class="caract1">
                         <div>Distancia: 5km</div>
                         <div>Intensidad: Media</div>
@@ -36,14 +29,14 @@
                 </div>
             </a>
             <a class="link" href="detalleRuta.php">
-                <div id="rutaRecomendada" onclick="">
+                <div class="rutaRecomendada" onclick="">
 
                     <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
                     <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
                     <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
 
                     <div class="tituloPequeño titulo">Sendero de O Monte</div>
-                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" fill="#AB7C94" class="iconoPequeño">&nbsp;&nbsp;3214</div>
+                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
 
                     <div class="caract1">
                         <div>Distancia: 5km</div>
@@ -56,14 +49,14 @@
                 </div>
             </a>
             <a class="link" href="detalleRuta.php">
-                <div id="rutaRecomendada" onclick="">
+                <div class="rutaRecomendada" onclick="">
 
                     <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
                     <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
                     <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
 
                     <div class="tituloPequeño titulo">Sendero de O Monte</div>
-                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" fill="#AB7C94" class="iconoPequeño">&nbsp;&nbsp;3214</div>
+                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
 
                     <div class="caract1">
                         <div>Distancia: 5km</div>
@@ -115,17 +108,18 @@
 
     <section id="venta1" class="azul">
         <img src="../img/personasMovil.jpg" alt="" class="imgGrande">
-        <span class="spanDeSpans">
-            <span class="tituloPequeño">Rutas en la palma de tu mano</span><br><br>
+        <div class="spanDeSpans">
+            <h2 class="tituloPequeño">Rutas en la palma de tu mano</h2><br>
             <span class="texto">Todo lo que necesitas para hacer tus rutas favoritas y descubrir otras nuevas lo tienes aquí</span>
-        </span>
+        </div>
+        <br>
     </section>
 
     <section id="venta2" class="azul">
         <img src="../img/barbas.jpg" alt="" class="imgGrande">
-        <span class="spanDeSpans">
-            <span class="tituloPequeño">Únete para disfrutar al aire libre sin distrac<wbr>ciones</span><br><br>
-            <br><br>
+        <div class="spanDeSpans">
+            <h2 class="tituloPequeño">Únete para disfrutar al aire libre sin distrac<wbr>ciones</h2>
+            <br>
             <div>
                 <div class="boton rojo">
                     <img src="../Iconos/router.svg" alt="youtube" class="iconoPequeño">
@@ -142,9 +136,9 @@
                     <span>&nbsp;&nbsp;Play Store</span>
                 </div>
             </div>
-        </span>
+        </div>
     </section>
-
+<br>
     <section id="caracteristicas">
         <!-- <h2>¿Cómo funciona?</h2> -->
         
@@ -202,3 +196,4 @@
     </section>
 </main>
 <script src="../js/desplazamientoImg.js"></script>
+<script src="../js/buscar.js"></script>

@@ -28,17 +28,15 @@ function usuarioError() {
         errorUsuario.classList.remove('error');
         errorUsuario.textContent = '';
         return fetch(`http://localhost:3000/api/checkuser?username=${usuario.value}`)
-        .then((response) => response.json())
-        .then(function (data) {
-            console.log(data);
-            if (data['exists']) {
-                errorUsuario.textContent = 'El usuario ya existe';
-                errorUsuario.classList.add('error');
-                errorEnUsuario = true;
-            }
-            console.log(errorEnUsuario);
-        })
-        .then(() => errorEnUsuario)
+            .then((response) => response.json())
+            .then(function (data) {
+                if (data['exists']) {
+                    errorUsuario.textContent = 'El usuario ya existe';
+                    errorUsuario.classList.add('error');
+                    errorEnUsuario = true;
+                }
+            })
+            .then(() => errorEnUsuario)
     }
 }
 
@@ -144,10 +142,14 @@ fecha.addEventListener("change", () => {
     }
 });
 
-document.getElementById('continuar').addEventListener('click', continuar);
-document.getElementById('continuar').addEventListener('enter', continuar);
+let botonContinuar = document.getElementById('continuar');
+if (botonContinuar != null) {
+    botonContinuar.addEventListener('click', continuar);
+    botonContinuar.addEventListener('enter', continuar);
+}
 function continuar(e) {
     e.preventDefault();
+    // console.log(e);
     //lo ejecuto una vez cada uno para que salga el mensaje de error
     let errores = nombreError();
     errores = usuarioError() || errores;
@@ -160,7 +162,10 @@ function continuar(e) {
     }
 }
 
-document.getElementById('registro').addEventListener('click', registrar);
+let botonRegistro = document.getElementById('registro');
+if (botonRegistro != null) {
+    botonRegistro.addEventListener('click', registrar);
+}
 let errorFormulario = document.getElementById('errorFormulario');
 function registrar(e) {
     errorFormulario.classList.remove('errorGrande');
@@ -210,8 +215,64 @@ function registrar(e) {
         })
 }
 
-document.getElementById('formularioRegistro').addEventListener('keypress', (e) => {
-    if (e.key == 'Enter') {
-        e.preventDefault();
-    }
-});
+let formularioRegistro = document.getElementById('formularioRegistro');
+if (formularioRegistro != null) {
+    formularioRegistro.addEventListener('keypress', (e) => {
+        if (e.key == 'Enter') {
+            e.preventDefault();
+        }
+    });
+}
+
+
+let botonGuardar = document.getElementById('registro');
+if (botonGuardar != null) {
+    botonGuardar.addEventListener('click', registrar);
+}
+function registrar(e) {
+    errorFormulario.classList.remove('errorGrande');
+    errorFormulario.textContent = '';
+    e.preventDefault();
+    //crear objeto para pasar 
+    let actividades = '';
+    actividades += document.getElementById('senderismo').checked ? 'senderismo' : '';
+    actividades += document.getElementById('montañismo').checked ? 'montañismo' : '';
+    actividades += document.getElementById('ciclismo').checked ? 'ciclismo' : '';
+    actividades += document.getElementById('correr').checked ? 'correr' : '';
+
+    let elementos = {
+        "fullname": nombre.value,
+        "username": usuario.value,
+        "email": correo.value,
+        "pass": contraseña.value,
+        "height": estatura.value,
+        "weight": peso.value,
+        "birthday": fecha.value,
+        "activities": actividades,
+    };
+
+    // 'senderismo': document.getElementById('senderismo').checked,
+    // 'montañismo': document.getElementById('montañismo').checked,
+    // 'ciclismo': document.getElementById('ciclismo').checked,
+    // 'correr': document.getElementById('correr').checked,
+
+
+    fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(elementos)
+    }).then((response) => response.json())
+        .then(function (data) {
+            console.log(data.success);
+            if (data['success']) {
+                sessionStorage.setItem("usuario", usuario.value);
+                sessionStorage.setItem("id", data['id']);
+                window.location = "index.php";
+            } else {
+                errorFormulario.textContent = data['msg'];
+                errorFormulario.classList.add('errorGrande');
+            }
+        })
+}

@@ -1,6 +1,6 @@
 <footer class="negro">
     <a href="../php/" class="logo">
-        <img src="../logos/image.png" class="imagenLogo">
+        <img src="../logos/image.png" class="imagenLogo" alt="logo">
         <span>&nbsp;&nbsp;ROAD RUNNER</span>
     </a>
     <!-- 480 768 1200 -->

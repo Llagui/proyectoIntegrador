@@ -25,12 +25,12 @@
                     </div>
                 </div>
                 <label for="nombre" id="cambioNombre">
-                    Nombre completo <input type="text" name="datos[nombre]" id="nombre" class="campo">
+                    Nombre completo <input type="text" name="datos[nombre]" id="nombre" class="campo" disabled>
                     <div id="errorNombre"></div>
                 </label>
 
                 <label for="usuario" id="cambioUsuario">
-                    Usuario <input type="text" name="datos[usuario]" id="usuario" class="campo">
+                    Usuario <input type="text" name="datos[usuario]" id="usuario" class="campo" disabled>
                     <div id="errorUsuario"></div>
 
                 </label>
@@ -81,7 +81,7 @@
                 </label>
             </div>
             <center>
-                <input type="submit" value="Guardar cambios" class="boton rojo" name="registro" id='registro'><br>
+                <input type="submit" value="Guardar cambios" class="boton rojo" name="registro" id='continuar'><br>
 
         </form>
         <button class="boton rojo" id="eliminar">Eliminar cuenta</button>
@@ -106,3 +106,4 @@
 <script src="../js/seguridadContraseña.js"></script>
 <script src="../js/registro.js"></script>
 <script src="../js/ventanaEliminar.js"></script>
+<script src="../js/edicionCuenta.js"></script>
