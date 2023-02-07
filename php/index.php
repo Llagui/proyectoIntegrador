@@ -77,25 +77,25 @@
         <div id="actividades">
             <div class="botonCirculoPequeño rojo" id='moverIzquierda'><img src="../Iconos/caret-left.svg" alt="" class="iconoPequeño"></div>
             <div id="contenedorImagenes">
-                <a class="link actividad" href="busqueda.php">
+                <a class="link actividad" href="busqueda.php?activity=senderismo">
                     <div>
                         <img src="../img/senderismo.jpg" alt="">
                         <div class="textoSombra">Senderismo</div>
                     </div>
                 </a>
-                <a class="link actividad" href="busqueda.php">
+                <a class="link actividad" href="busqueda.php?activity=montañismo">
                     <div>
                         <img src="../img/montanismo.jpg" alt="">
                         <div class="textoSombra">Montañismo</div>
                     </div>
                 </a>
-                <a class="link actividad" href="busqueda.php">
+                <a class="link actividad" href="busqueda.php?activity=correr">
                     <div>
                         <img src="../img/correr.jpg" alt="">
                         <div class="textoSombra">Correr</div>
                     </div>
                 </a>
-                <a class="link actividad" href="busqueda.php">
+                <a class="link actividad" href="busqueda.php?activity=ciclismo">
                     <div>
                         <img src="../img/ciclismo.jpg" alt="">
                         <div class="textoSombra">Ciclismo</div>

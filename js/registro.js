@@ -27,7 +27,7 @@ function usuarioError() {
     } else {
         errorUsuario.classList.remove('error');
         errorUsuario.textContent = '';
-        return fetch(`http://localhost:3000/api/checkuser?username=${usuario.value}`)
+        fetch(`http://localhost:3000/api/checkuser?username=${usuario.value}`)
             .then((response) => response.json())
             .then(function (data) {
                 if (data['exists']) {
@@ -35,12 +35,10 @@ function usuarioError() {
                     errorUsuario.classList.add('error');
                     errorEnUsuario = true;
                 }
+                return errorEnUsuario
             })
-            .then(() => errorEnUsuario)
     }
 }
-
-
 
 let correo = document.getElementById('correo');
 let errorCorreo = document.getElementById('errorCorreo');
@@ -63,7 +61,6 @@ function correoError() {
     }
     return errorEnCorreo;
 }
-
 
 let contraseña = document.getElementById('contraseña');
 let errorContraseña = document.getElementById('errorContraseña');
@@ -172,11 +169,11 @@ function registrar(e) {
     errorFormulario.textContent = '';
     e.preventDefault();
     //crear objeto para pasar 
-    let actividades = '';
-    actividades += document.getElementById('senderismo').checked ? 'senderismo' : '';
-    actividades += document.getElementById('montañismo').checked ? 'montañismo' : '';
-    actividades += document.getElementById('ciclismo').checked ? 'ciclismo' : '';
-    actividades += document.getElementById('correr').checked ? 'correr' : '';
+    let activities = [];
+    activities.push(document.getElementById('senderismo').checked ? 'senderismo' : '');
+    activities.push(document.getElementById('montañismo').checked ? 'montañismo' : '');
+    activities.push(document.getElementById('ciclismo').checked ? 'ciclismo' : '');
+    activities.push(document.getElementById('correr').checked ? 'correr' : '');
 
     let elementos = {
         "fullname": nombre.value,
@@ -186,7 +183,7 @@ function registrar(e) {
         "height": estatura.value,
         "weight": peso.value,
         "birthday": fecha.value,
-        "activities": actividades,
+        activities,
     };
 
     // 'senderismo': document.getElementById('senderismo').checked,
@@ -203,10 +200,11 @@ function registrar(e) {
         body: JSON.stringify(elementos)
     }).then((response) => response.json())
         .then(function (data) {
-            console.log(data.success);
+            console.log(data);
             if (data['success']) {
                 sessionStorage.setItem("usuario", usuario.value);
                 sessionStorage.setItem("id", data['id']);
+                sessionStorage.setItem("token", data['token']);
                 window.location = "index.php";
             } else {
                 errorFormulario.textContent = data['msg'];
@@ -225,54 +223,67 @@ if (formularioRegistro != null) {
 }
 
 
-let botonGuardar = document.getElementById('registro');
+//funcion edicion perfil guardar cambios
+let botonGuardar = document.getElementById('guardarCambios');
 if (botonGuardar != null) {
-    botonGuardar.addEventListener('click', registrar);
+    botonGuardar.addEventListener('click', guardarCambios);
 }
-function registrar(e) {
+function guardarCambios(e) {
     errorFormulario.classList.remove('errorGrande');
     errorFormulario.textContent = '';
     e.preventDefault();
     //crear objeto para pasar 
-    let actividades = '';
-    actividades += document.getElementById('senderismo').checked ? 'senderismo' : '';
-    actividades += document.getElementById('montañismo').checked ? 'montañismo' : '';
-    actividades += document.getElementById('ciclismo').checked ? 'ciclismo' : '';
-    actividades += document.getElementById('correr').checked ? 'correr' : '';
+    let activities = [];
+    activities.push(document.getElementById('senderismo').checked ? 'senderismo' : '');
+    activities.push(document.getElementById('montañismo').checked ? 'montañismo' : '');
+    activities.push(document.getElementById('ciclismo').checked ? 'ciclismo' : '');
+    activities.push(document.getElementById('correr').checked ? 'correr' : '');
 
     let elementos = {
-        "fullname": nombre.value,
-        "username": usuario.value,
+        "id": sessionStorage.getItem('id'),
         "email": correo.value,
         "pass": contraseña.value,
         "height": estatura.value,
         "weight": peso.value,
         "birthday": fecha.value,
-        "activities": actividades,
+        activities,
     };
+    let errores = correoError();
+    errores = contraseñaError() || errores;
+    errores = contraseñaRepetidaError() || errores;
 
     // 'senderismo': document.getElementById('senderismo').checked,
     // 'montañismo': document.getElementById('montañismo').checked,
     // 'ciclismo': document.getElementById('ciclismo').checked,
     // 'correr': document.getElementById('correr').checked,
 
-
-    fetch('http://localhost:3000/api/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(elementos)
-    }).then((response) => response.json())
-        .then(function (data) {
-            console.log(data.success);
-            if (data['success']) {
-                sessionStorage.setItem("usuario", usuario.value);
-                sessionStorage.setItem("id", data['id']);
-                window.location = "index.php";
-            } else {
-                errorFormulario.textContent = data['msg'];
-                errorFormulario.classList.add('errorGrande');
+    if (!errores) {
+        fetch('http://localhost:3000/api/user', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': `${sessionStorage.getItem('token')}`,
+            },
+            body: JSON.stringify(elementos)
+        }).then((response) => {
+            switch (response.status) {
+                case 400:
+                    return JSON.stringify({ success: false, msg: 'Error con id' });
+                case 401:
+                    return JSON.stringify({ success: false, msg: 'Token no válido' });
+                case 200:
+                    return response.json();
             }
         })
+            .then(function (data) {
+                // console.log(elementos);
+                // console.log(data);
+                if (data['success']) {
+                    window.location = "index.php";
+                } else {
+                    errorFormulario.textContent = data['msg'];
+                    errorFormulario.classList.add('errorGrande');
+                }
+            })
+    }
 }

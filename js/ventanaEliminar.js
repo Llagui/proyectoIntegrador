@@ -8,3 +8,24 @@ function quitarVentanaEliminar(e) {
     e.preventDefault();
     document.getElementById('ventanaEliminar').style.display = 'none';
 }
+
+document.getElementById('confirmar').addEventListener("click", (e) => {
+    fetch(`http://localhost:3000/api/user?id=${sessionStorage.getItem('id')}`, {
+        method: 'DELETE',
+        headers: {
+            // 'Content-Type': 'application/json;charset=utf-8',
+            'Authorization': `${sessionStorage.getItem('token')}`,
+        }
+    }).then((response) =>  response.json())
+        .then(function (data) {
+            console.log(data);
+            if (data['success']) {
+                sessionStorage.clean();
+                window.location = "index.php";
+            } else {
+                let errorFormulario = document.getElementById('errorEliminar');
+                errorFormulario.textContent = data['msg'];
+                errorFormulario.classList.add('errorGrande');
+            }
+        })
+})

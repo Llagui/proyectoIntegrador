@@ -166,8 +166,10 @@ main {
 .errorGrande {
     background-color: red;
     color: #ffffff;
-    justify-self: center;
-    width: 50%;
+    margin-left: 12.5%;
+    text-align: center;
+    width: 75%;
+    border-radius: 50px;
 }
 
 .error {
@@ -456,6 +458,7 @@ footer .logo {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 75px);
+    border-radius: 20px;
 }
 
 .rutaRecomendada>img {
@@ -510,6 +513,8 @@ footer .logo {
 }
 
 /* Seccion rutas actividades */
+
+
 #actividades,
 #contenedorImagenes {
     display: flex;
@@ -550,6 +555,7 @@ footer .logo {
     align-items: center;
 }
 
+/*Media queries*/
 @media (max-width: 1000px) {
     #contenedorImagenes a:nth-child(4) {
         display: none;
@@ -566,6 +572,74 @@ footer .logo {
     #contenedorImagenes a:nth-child(2) {
         display: none;
     }
+}
+
+/* Animaciones */
+@-webkit-keyframes scale-in-center {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes scale-in-center {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.scale-in-center {
+    -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes scale-out-center {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scale-out-center {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+}
+
+
+.scale-out-center {
+    -webkit-animation: scale-out-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: scale-out-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 /* Seccion Venta 1 */
@@ -777,13 +851,14 @@ footer .logo {
     display: none;
     height: fit-content;
     width: fit-content;
+    /* border-color: transparent; */
+    background: linear-gradient(#BFEFFF, #BFEFFF), radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.164) 50%, rgba(0, 0, 0, 0) 100%);
     border: 10px transparent solid;
     padding: 10px;
     position: absolute;
     right: -20px;
-    /*top: 50px;*/
     border-radius: 20px;
-    background-clip: padding-box;
+    background-clip: padding-box, border-box;
 }
 
 #menu button {
@@ -861,13 +936,14 @@ footer .logo {
 .seguridad {
     margin-top: -8px;
     color: white;
-    width: 170px;
+    width: 150px;
     height: 15px;
     font-size: 10px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+
 }
 
 @media (max-height: 750px) {
@@ -884,6 +960,7 @@ footer .logo {
     padding: 25px;
     border-radius: 20px;
     /* min-width: 100%; */
+    transform: scale(0.93);
 }
 
 #formularioCambios center {
@@ -1038,7 +1115,6 @@ footer .logo {
 
 #barraBusqueda #busqueda {
     width: calc(100% - 70px);
-    padding: 0;
     margin-right: 10px;
 }
 
@@ -1091,9 +1167,14 @@ footer .logo {
 .scrollmenu select {
     display: inline-block;
     text-align: center;
+    width: 50px;
     padding: 5px;
     width: 150px;
+    border: 0;
+    margin: 0;
+    padding: 0;
 }
+
 
 #resultados #rutas {
     position: relative;
@@ -1173,12 +1254,139 @@ footer .logo {
     }
 }
 
+/*****************
+ *             Pagina mis rutas
+ ****************/
 
+#misRutas #rutas {
+    position: relative;
+    width: calc(100vw - 55px);
+    float: left;
+    height: 80vh;
+    overflow: auto;
+    margin: 0 25px;
+    padding-right: 5px;
+}
 
+#misRutas #rutas .rutaRecomendada {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 50px);
+    padding: 5px;
+    margin: 5px 0;
+}
+
+#misRutas #rutas .rutaRecomendada .titulo {
+    padding: 5px;
+    grid-column: 1/8;
+    grid-row: 1;
+}
+
+#misRutas #rutas .imagenPrincipal {
+    grid-column: 1/3;
+    grid-row: 2/6;
+}
+
+#misRutas #rutas .imagenSegunda {
+    grid-column: 3;
+    grid-row: 2/4;
+}
+
+#misRutas #rutas .imagenTercera {
+    grid-column: 3;
+    grid-row: 4/6;
+}
+
+#misRutas .corazones {
+    grid-row: 2;
+    grid-column: 6;
+}
+
+#misRutas #botones {
+    grid-row: 3/6;
+    grid-column: 6/8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#misRutas .descripcion {
+    padding: 5px;
+    grid-row: 2/4;
+    grid-column: 4/6;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+
+#misRutas .caract1 {
+    padding: 5px;
+    grid-row: 4;
+    grid-column: 4;
+}
+
+#misRutas .caract2 {
+    padding: 5px;
+    grid-row: 4;
+    grid-column: 5;
+}
+
+@media (max-width: 800px) {
+    #misRutas #rutas .rutaRecomendada {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(6, 50px);
+    } 
+    #misRutas .corazones {
+        grid-row: 1;
+        grid-column: 3/6;
+    }
+    #misRutas #botones {
+        grid-row: 6;
+        grid-column: 1/6;
+        flex-direction: row;
+    }
+}
+@media (max-width: 680px) {
+    #misRutas #rutas .rutaRecomendada {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(8, 50px);
+    } 
+    #misRutas .corazones {
+        grid-column: 3;
+    }
+    #misRutas #botones {
+        grid-row: 6/9;
+        grid-column: 3;
+        flex-direction: column;
+    }
+    #misRutas .descripcion {
+        grid-row: 6;
+        grid-column: 1/3;
+    }
+    #misRutas .caract1 {
+        padding: 5px;
+        grid-row: 7;
+        grid-column: 1;
+    }
+    
+    #misRutas .caract2 {
+        padding: 5px;
+        grid-row: 7;
+        grid-column: 2;
+    }
+}
+@media (max-width: 450px) {
+    #misRutas #botones .boton{
+        width: 100px;
+    }
+    #misRutas #botones .boton span{
+        display: none;
+    }
+}
 
 
 
 /* GIF trabajando */
 #trabajando {
-    height: 30vw;
+    height: 20vw;
 }

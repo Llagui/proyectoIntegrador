@@ -6,10 +6,10 @@ if (sessionStorage.getItem('id') != null) {
     </button>
     <div id="menu" class="azul">
     <a href="edicionPerfil.php">
-            <button class="boton rojo">Configuración</button>
+            <button class="boton rojo"><img src="../Iconos/person-fill-gear.svg" alt="" class="iconoPequeño">&nbsp;Configuración</button>
         </a>
         <a href="misRutas.php">
-            <button class="boton rojo">Mis rutas</button>
+            <button class="boton rojo"><img src="../Iconos/signpost-fill.svg" alt="" class="iconoPequeño">&nbsp;Mis rutas</button>
         </a>
         <a>
             <button class="boton rojo" id='cerrarSesion'>Cerrar sesión</button>

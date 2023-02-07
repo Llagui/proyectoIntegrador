@@ -1,19 +1,14 @@
-<!-- <main id="contenedor">
-    <img src="../img/pexels-oziel-gómez-840667.jpg" alt="" class="imgFondoDerecha">
 
-    <div class="azul" id="formularioSesion">
-        <form action="registro.php" method="post" id="formularioRegistro">
-
-        </form>
-    </div>
-    <img src="../img/pexels-rrinna-2071553.jpg" alt="" class="imgFondoIzquierda">
-</main> -->
-
+<script>
+    if (sessionStorage.getItem("usuario") == null) {
+        window.location = "index.php";
+    }
+</script>
 <main id="contenedor">
     <img src="../img/pexels-oziel-gómez-840667.jpg" alt="" class="imgFondoDerecha">
 
     <div class="azul" id="formularioCambios">
-        <form action="registro.php" method="post">
+        <form action="registro.php" method="post"  enctype="multipart/form-data">
 
             <h1>¡Bienvenido<br> a la configuración de <br> tu cuenta!</h1>
             <div id="cambiosCuenta">
@@ -80,8 +75,10 @@
                     </div>
                 </label>
             </div>
+            <br>
+            <div id="errorFormulario"></div>
             <center>
-                <input type="submit" value="Guardar cambios" class="boton rojo" name="registro" id='continuar'><br>
+                <input type="submit" value="Guardar cambios" class="boton rojo" name="registro" id='guardarCambios'><br>
 
         </form>
         <button class="boton rojo" id="eliminar">Eliminar cuenta</button>
@@ -94,6 +91,7 @@
         <div class="azul">
             <center>
                 <h2>No nos dejes :( <br> ¿Estas seguro de querer eliminar la cuenta?</h2>
+                <div id="errorEliminar"></div>
                 <button class="boton rojo" id="confirmar">Confirmar</button>
                 <br>
                 <button class="boton rojo" id="cancelar">Cancelar</button>

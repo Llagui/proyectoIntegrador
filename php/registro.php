@@ -1,3 +1,8 @@
+<script>
+    if (sessionStorage.getItem("usuario") != null) {
+        window.location = "index.php";
+    }
+</script>
 <main id="contenedor">
     <img src="../img/pexels-suliman-sallehi-1822461.jpg" alt="" class="imgFondoIzquierda">
 
