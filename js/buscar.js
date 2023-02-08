@@ -19,6 +19,10 @@ if (rutas != null) {
     rutas.addEventListener("scroll", createRoutes);
 }
 
+document.getElementById('ordenar').addEventListener('input', (e) => {
+    lupa.click();
+});
+
 function busqueda(e) {
     e.preventDefault();
     if (rutas != null) {
@@ -27,12 +31,12 @@ function busqueda(e) {
 
     mostrarDesde = 0;
     let ruta = 'http://localhost:3000/api/route?';
-    console.log(window.globalThis.location);
+    // console.log(window.globalThis.location);
     if (window.globalThis.location.pathname == '/proyecto%20Integrador/php/') {
         window.location = `./busqueda.php?&name=${nombre.value}`;
     } else {
-        ruta += (nombre.value == '') ? '' : `&name=${nombre.value}`;
-        ruta += (ordenar.value == '') ? '' : `&order=${ordenar.value}`;
+        ruta += (nombre.value == '') ? '' : `      name=${nombre.value}`;
+        // ruta += (ordenar.value == '') ? '' : `&order=${ordenar.value}`;
         ruta += (distancia.value == '') ? '' : `${distancia.value}`;
         ruta += (tipo.value == '') ? '' : `&circular=${tipo.value}`;
         ruta += (desnivel.value == '') ? '' : `${desnivel.value}`;
@@ -50,6 +54,27 @@ function busqueda(e) {
             return response.json();
         }
     }).then(function (data) {
+        switch (ordenar.value) {
+            case 'distancia+':
+                data = data.sort((a, b) => b.distance - a.distance);
+                break;
+            case 'distancia-':
+                data = data.sort((a, b) => a.distance - b.distance);
+                break;
+            case 'desnivel+':
+                data = data.sort((a, b) => (b.max_height - b.min_height) - (a.max_height - a.min_height));
+                break;
+            case 'desnivel-':
+                data = data.sort((a, b) => (a.max_height - a.min_height) - (b.max_height - b.min_height));
+                break;
+            case 'intensidad+':
+                data = data.sort((a, b) => b.distance - a.distance);
+                break;
+            case 'intensidad-':
+                data = data.sort((a, b) => a.distance - b.distance);
+                break;
+        }
+        // map.off();
         todasRutas = data;
         createRoutes();
     });
@@ -58,6 +83,8 @@ function busqueda(e) {
 function createRoutes() {
     if ((rutas.scrollTop + rutas.clientHeight) > (rutas.scrollHeight - 50) && !creandoImagenes) {
         creandoImagenes = true;
+        // console.log(todasRutas);
+
         todasRutas.filter((_, index) => {
             return (index < mostrarDesde + 5 && index >= mostrarDesde);
         })
@@ -91,3 +118,4 @@ function createRoutes() {
         creandoImagenes = false;
     }
 }
+

@@ -11,7 +11,7 @@
             <div id="pag1">
                 <h1>Registrate hoy para empezar a planificar tu próxima aventura</h1>
                 <label for="nombre">Nombre completo</label><br>
-                <input type="text" name="datos[nombre]" id="nombre" class="campo"><br>
+                <input type="text" name="datos[nombre]" id="nombre" class="campo" maxlength="10"><br>
                 <div id="errorNombre"></div>
 
                 <label for="usuario">Usuario</label><br>

@@ -500,6 +500,7 @@ footer .logo {
     align-self: center;
     justify-self: center;
     font-size: 20px;
+    align-items: center;
 }
 
 .caract1 {
@@ -1236,18 +1237,18 @@ footer .logo {
         grid-row: 3/5;
     }
 
-    .corazones {
+    #resultados .corazones {
         grid-row: 1/3;
         grid-column: 7;
     }
 
-    .caract1 {
+    #resultados .caract1 {
         padding: 5px;
         grid-row: 3;
         grid-column: 4/6;
     }
 
-    .caract2 {
+    #resultados .caract2 {
         padding: 5px;
         grid-row: 3;
         grid-column: 6/8;
@@ -1335,55 +1336,218 @@ footer .logo {
     #misRutas #rutas .rutaRecomendada {
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(6, 50px);
-    } 
+    }
+
     #misRutas .corazones {
         grid-row: 1;
         grid-column: 3/6;
     }
+
     #misRutas #botones {
         grid-row: 6;
         grid-column: 1/6;
         flex-direction: row;
     }
 }
+
 @media (max-width: 680px) {
     #misRutas #rutas .rutaRecomendada {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(8, 50px);
-    } 
+    }
+
     #misRutas .corazones {
         grid-column: 3;
     }
+
     #misRutas #botones {
         grid-row: 6/9;
         grid-column: 3;
         flex-direction: column;
     }
+
     #misRutas .descripcion {
         grid-row: 6;
         grid-column: 1/3;
     }
+
     #misRutas .caract1 {
         padding: 5px;
         grid-row: 7;
         grid-column: 1;
     }
-    
+
     #misRutas .caract2 {
         padding: 5px;
         grid-row: 7;
         grid-column: 2;
     }
 }
+
 @media (max-width: 450px) {
-    #misRutas #botones .boton{
+    #misRutas #botones .boton {
         width: 100px;
     }
-    #misRutas #botones .boton span{
+
+    #misRutas #botones .boton span {
         display: none;
     }
 }
 
+/*****************
+ *             Pagina detalle ruta
+ ****************/
+#detalleRutas {
+    padding: 10px 25px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+#detalleRutas .rutaRecomendada {
+    grid-template-rows: repeat(4, 125px);
+}
+
+#detalleRutas .imagenPerfil {
+    width: 20px;
+    height: 20px;
+    font-size: 0;
+    margin: 0;
+}
+
+#detalleRutas h3 {
+    display: flex;
+    align-items: center;
+}
+
+#derecha,
+#iquierda {
+    width: calc(100% - 20px);
+    padding: 5px;
+}
+
+#derecha {
+    grid-column: 1;
+}
+
+#izquierda {
+    grid-column: 2;
+}
+
+.comentario img {
+    border: 1px solid;
+    border-radius: 100px;
+    height: 75px;
+    width: 75px;
+    object-fit: cover;
+    object-position: 100% 20%;
+}
+
+.comentario div {
+    position: relative;
+    float: right;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    width: calc(100% - 80px);
+    overflow-wrap: break-word;
+    padding: 10px 20px;
+}
+
+.comentario {
+    margin: 20px 0;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+}
+
+#detalleRutas #mapa {
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+}
+
+#detalleRutas #caract {
+    float: left;
+    position: relative;
+    width: calc(100% - 10px);
+    padding: 5px;
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+#detalleRutas #caract div {
+    padding: 5px;
+
+}
+
+#detalleRutas #botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#detalleRutas #izquierda .rutaRecomendada {
+    grid-template-rows: repeat(6, 50px);
+}
+
+@media (max-width: 900px) {
+    #detalleRutas {
+        grid-template-columns: 2fr 1fr;
+    }
+
+    #detalleRutas .rutaRecomendada {
+        grid-template-rows: repeat(4, 100px);
+    }
+
+    #detalleRutas #botones {
+        height: 150px;
+        flex-direction: column;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+
+    #detalleRutas #mapa {
+        height: 400px;
+    }
+
+    #detalleRutas #izquierda .rutaRecomendada {
+        grid-template-rows: repeat(6, 30px);
+    }
+
+    #detalleRutas #izquierda .rutaRecomendada .titulo,
+    #detalleRutas #izquierda .rutaRecomendada .corazones,
+    #detalleRutas #izquierda .rutaRecomendada .caract1,
+    #detalleRutas #izquierda .rutaRecomendada .caract2 {
+        font-size: 13px;
+    }
+
+    #detalleRutas #izquierda .rutaRecomendada .corazones .iconoPequeño {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 700px) {
+    #detalleRutas .rutaRecomendada {
+        grid-template-rows: repeat(4, 75px);
+    }
+
+    #detalleRutas #mapa {
+        height: 300px;
+    }
+
+    /* #detalleRutas #izquierda .rutaRecomendada {
+        transform-
+    } */
+}
+
+@media (max-width: 550px) {
+    .comentario div.azul {
+        overflow-wrap: break-word;
+        padding: 10px;
+    }
+}
 
 
 /* GIF trabajando */
