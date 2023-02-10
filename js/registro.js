@@ -27,7 +27,7 @@ function usuarioError() {
     } else {
         errorUsuario.classList.remove('error');
         errorUsuario.textContent = '';
-        fetch(`http://localhost:3000/api/checkuser?username=${usuario.value}`)
+        fetch(`../api/checkuser/?username=${usuario.value}`)
             .then((response) => response.json())
             .then(function (data) {
                 if (data['exists']) {
@@ -104,40 +104,53 @@ function contraseñaRepetidaError() {
 // PAGINA 2
 let estatura = document.getElementById('estatura');
 let errorEstatura = document.getElementById('errorEstatura');
-estatura.addEventListener("change", () => {
+estatura.addEventListener("change", estaturaError);
+function estaturaError() {
+    let errorEnEstatura = false;
     if (estatura.value < 100 || estatura.value > 230) {
         errorEstatura.classList.add('error');
         errorEstatura.textContent = 'Altura errónea';
+        errorEnEstatura = true;
     } else {
         errorEstatura.classList.remove('error');
         errorEstatura.textContent = '';
     }
-});
+    return errorEnEstatura;
+}
+
 
 let peso = document.getElementById('peso');
 let errorPeso = document.getElementById('errorPeso');
-peso.addEventListener("change", () => {
+peso.addEventListener("change", pesoError);
+function pesoError() {
+    let errorEnPeso = false;
     if (peso.value < 50 || peso.value > 180) {
         errorPeso.classList.add('error');
         errorPeso.textContent = 'Peso incorrecto';
+        errorEnPeso = true;
     } else {
         errorPeso.classList.remove('error');
         errorPeso.textContent = '';
     }
-});
+    return errorEnPeso;
+}
 
 let fecha = document.getElementById('fecha');
 let errorFecha = document.getElementById('errorFecha');
-fecha.addEventListener("change", () => {
+fecha.addEventListener("change", fechaError);
+function fechaError() {
+    let errorEnFecha = false;
     let fechaNacimiento = new Date(fecha.value);
     if (fechaNacimiento < Date('01/01/1900') || fechaNacimiento > Date.now()) {
         errorFecha.classList.add('error');
         errorFecha.textContent = 'Fecha incorrecta';
+        errorEnFecha = true;
     } else {
         errorFecha.classList.remove('error');
         errorFecha.textContent = '';
     }
-});
+    return errorEnFecha;
+}
 
 let botonContinuar = document.getElementById('continuar');
 if (botonContinuar != null) {
@@ -146,7 +159,7 @@ if (botonContinuar != null) {
 }
 function continuar(e) {
     e.preventDefault();
-    // console.log(e);
+
     //lo ejecuto una vez cada uno para que salga el mensaje de error
     let errores = nombreError();
     errores = usuarioError() || errores;
@@ -163,17 +176,33 @@ let botonRegistro = document.getElementById('registro');
 if (botonRegistro != null) {
     botonRegistro.addEventListener('click', registrar);
 }
+
 let errorFormulario = document.getElementById('errorFormulario');
 function registrar(e) {
     errorFormulario.classList.remove('errorGrande');
     errorFormulario.textContent = '';
     e.preventDefault();
+    let errores = false;
+
+    if (estatura.value != '') {
+        errores = estaturaError() || errores;
+    }
+    if (fecha.value != '') {
+        errores = fechaError() || errores;
+    }
+    if (peso.value != '') {
+        errores = pesoError() || errores;
+    }
+
+    // Comprobar si los campos no esenciales estan rellenados y si si pasar funciones para comprobar errores
+
     //crear objeto para pasar 
     let activities = [];
     activities.push(document.getElementById('senderismo').checked ? 'senderismo' : '');
     activities.push(document.getElementById('montañismo').checked ? 'montañismo' : '');
     activities.push(document.getElementById('ciclismo').checked ? 'ciclismo' : '');
     activities.push(document.getElementById('correr').checked ? 'correr' : '');
+
 
     let elementos = {
         "fullname": nombre.value,
@@ -186,31 +215,32 @@ function registrar(e) {
         activities,
     };
 
-    // 'senderismo': document.getElementById('senderismo').checked,
-    // 'montañismo': document.getElementById('montañismo').checked,
-    // 'ciclismo': document.getElementById('ciclismo').checked,
-    // 'correr': document.getElementById('correr').checked,
-
-
-    fetch('http://localhost:3000/api/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(elementos)
-    }).then((response) => response.json())
-        .then(function (data) {
-            console.log(data);
-            if (data['success']) {
-                sessionStorage.setItem("usuario", usuario.value);
-                sessionStorage.setItem("id", data['id']);
-                sessionStorage.setItem("token", data['token']);
-                window.location = "index.php";
-            } else {
-                errorFormulario.textContent = data['msg'];
-                errorFormulario.classList.add('errorGrande');
-            }
+    // console.log(JSON.stringify(elementos));
+    if (!errores) {
+        fetch('../api/register/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(elementos)
+        }).then((response) => {
+            // console.log(response);
+            return response.json()
         })
+            .then(function (data) {
+                // console.log(data);
+                if (data['success']) {
+                    sessionStorage.setItem("usuario", usuario.value);
+                    sessionStorage.setItem("id", data['id']);
+                    sessionStorage.setItem("token", data['token']);
+                    window.location = "index.php";
+                } else {
+                    errorFormulario.textContent = data['msg'];
+                    errorFormulario.classList.add('errorGrande');
+                }
+            })
+    }
+
 }
 
 let formularioRegistro = document.getElementById('formularioRegistro');
@@ -251,14 +281,23 @@ function guardarCambios(e) {
     let errores = correoError();
     errores = contraseñaError() || errores;
     errores = contraseñaRepetidaError() || errores;
+    if (estatura.value != '') {
+        errores = estaturaError() || errores;
+    }
+    if (fecha.value != '') {
+        errores = fechaError() || errores;
+    }
+    if (peso.value != '') {
+        errores = pesoError() || errores;
+    }
 
     // 'senderismo': document.getElementById('senderismo').checked,
     // 'montañismo': document.getElementById('montañismo').checked,
     // 'ciclismo': document.getElementById('ciclismo').checked,
     // 'correr': document.getElementById('correr').checked,
-
+    // console.log(errores);
     if (!errores) {
-        fetch('http://localhost:3000/api/user', {
+        fetch('../api/user/', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
@@ -266,17 +305,17 @@ function guardarCambios(e) {
             },
             body: JSON.stringify(elementos)
         }).then((response) => {
-            switch (response.status) {
-                case 400:
-                    return JSON.stringify({ success: false, msg: 'Error con id' });
-                case 401:
-                    return JSON.stringify({ success: false, msg: 'Token no válido' });
-                case 200:
-                    return response.json();
-            }
+            // switch (response.status) {
+            // case 400:
+            //     return JSON.stringify({ success: false, msg: 'Error con id' });
+            // case 401:
+            //     return JSON.stringify({ success: false, msg: 'Token no válido' });
+            // case 200:
+
+            return response.json();
+            // }
         })
             .then(function (data) {
-                // console.log(elementos);
                 // console.log(data);
                 if (data['success']) {
                     window.location = "index.php";

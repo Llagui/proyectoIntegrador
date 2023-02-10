@@ -1,5 +1,5 @@
 // let datos;
-fetch(`http://localhost:3000/api/user?id=${sessionStorage.getItem('id')}`, {
+fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json;charset=utf-8',

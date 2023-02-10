@@ -167,6 +167,8 @@ main {
     background-color: red;
     color: #ffffff;
     margin-left: 12.5%;
+    margin-right: 12.5%;
+    margin: 5px;
     text-align: center;
     width: 75%;
     border-radius: 50px;
@@ -1138,8 +1140,8 @@ footer .logo {
     overflow: auto;
     white-space: nowrap;
     width: 60vw;
-    padding-bottom: 5px;
-    margin: 5px;
+    padding: 5px;
+    /* margin: 5px; */
 }
 
 /* Barras de desplazamiento */
@@ -1198,13 +1200,14 @@ footer .logo {
 @media (max-width: 800px) {
     #mapa {
         width: 100%;
-        height: 200px;
+        height: 225px;
     }
 
     #resultados #rutas {
-        width: calc(100% - 20px);
-        height: calc(100vh - 385px);
-        padding: 10px;
+        width: calc(100% - 40px);
+        height: calc(100vh - 400px);
+        padding: 0 10px;
+        margin: 10px;
     }
 }
 
@@ -1398,13 +1401,28 @@ footer .logo {
  *             Pagina detalle ruta
  ****************/
 #detalleRutas {
-    padding: 10px 25px;
+    padding: 10px 20px;
     display: grid;
+    width: calc(100% - 40px);
     grid-template-columns: 3fr 1fr;
+    margin: 0;
+}
+#nombreUsuario{
+    display: flex;
+    align-items: center;
+}
+
+#detalleRutas #descripcion {
+    text-align: justify;
+    overflow-wrap:break-word;
 }
 
 #detalleRutas .rutaRecomendada {
     grid-template-rows: repeat(4, 125px);
+    
+}
+#detalleRutas .rutaRecomendada *{
+    overflow-wrap:break-word;
 }
 
 #detalleRutas .imagenPerfil {
@@ -1414,15 +1432,12 @@ footer .logo {
     margin: 0;
 }
 
-#detalleRutas h3 {
-    display: flex;
-    align-items: center;
-}
-
 #derecha,
-#iquierda {
-    width: calc(100% - 20px);
+#izquierda {
+    width: calc(100% - 10px);
     padding: 5px;
+    grid-row: 2;
+
 }
 
 #derecha {
@@ -1449,9 +1464,10 @@ footer .logo {
     display: flex;
     align-items: center;
     border-radius: 20px;
-    width: calc(100% - 80px);
+    width: calc(100% - 125px);
     overflow-wrap: break-word;
     padding: 10px 20px;
+    margin: 0 5px
 }
 
 .comentario {
@@ -1467,7 +1483,12 @@ footer .logo {
     border-radius: 20px;
 }
 
+#detalleRutas #caract h3 {
+    overflow-wrap: break-word;
+}
+
 #detalleRutas #caract {
+
     float: left;
     position: relative;
     width: calc(100% - 10px);
@@ -1489,6 +1510,16 @@ footer .logo {
 
 #detalleRutas #izquierda .rutaRecomendada {
     grid-template-rows: repeat(6, 50px);
+}
+
+#detalleTitulo {
+    grid-row: 1;
+    grid-column: 1/3;
+}
+
+#detalleRutas .corazones {
+    cursor: pointer;
+    width: fit-content;
 }
 
 @media (max-width: 900px) {
@@ -1533,13 +1564,18 @@ footer .logo {
         grid-template-rows: repeat(4, 75px);
     }
 
+    #detalleRutas h1{
+        padding: 5px;
+    }
+    #detalleRutas {
+        padding: 0;
+        width: 100% ;
+    }
+
     #detalleRutas #mapa {
         height: 300px;
     }
 
-    /* #detalleRutas #izquierda .rutaRecomendada {
-        transform-
-    } */
 }
 
 @media (max-width: 550px) {

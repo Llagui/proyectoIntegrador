@@ -15,13 +15,18 @@ let mostrarDesde = 0;
 let pagina = document.documentElement;
 let rutas = document.getElementById('rutas');
 let creandoImagenes = false;
+
+let rutasMapa = [];
+
 if (rutas != null) {
     rutas.addEventListener("scroll", createRoutes);
 }
 
-document.getElementById('ordenar').addEventListener('input', (e) => {
-    lupa.click();
-});
+if (ordenar != null) {
+    ordenar.addEventListener('input', (e) => {
+        lupa.click();
+    });
+}
 
 function busqueda(e) {
     e.preventDefault();
@@ -30,12 +35,12 @@ function busqueda(e) {
     }
 
     mostrarDesde = 0;
-    let ruta = 'http://localhost:3000/api/route?';
-    // console.log(window.globalThis.location);
-    if (window.globalThis.location.pathname == '/proyecto%20Integrador/php/') {
+    let ruta = '../api/routes/?';
+    // console.log(window.globalThis.location );
+    if (window.globalThis.location.pathname == '/proyecto%20Integrador/php/index.php' || window.globalThis.location.pathname == '/proyecto%20Integrador/php/') {
         window.location = `./busqueda.php?&name=${nombre.value}`;
     } else {
-        ruta += (nombre.value == '') ? '' : `      name=${nombre.value}`;
+        ruta += (nombre.value == '') ? '' : `name=${nombre.value}`;
         // ruta += (ordenar.value == '') ? '' : `&order=${ordenar.value}`;
         ruta += (distancia.value == '') ? '' : `${distancia.value}`;
         ruta += (tipo.value == '') ? '' : `&circular=${tipo.value}`;
@@ -50,10 +55,12 @@ function busqueda(e) {
             'Authorization': `${sessionStorage.getItem('token')}`,
         },
     }).then(response => {
-        if (response.status == 200) {
-            return response.json();
-        }
+        // console.log(response);
+        // if (response.status == 200) {
+        return response.json();
+        // }
     }).then(function (data) {
+        // console.log(data);
         switch (ordenar.value) {
             case 'distancia+':
                 data = data.sort((a, b) => b.distance - a.distance);
@@ -74,7 +81,9 @@ function busqueda(e) {
                 data = data.sort((a, b) => a.distance - b.distance);
                 break;
         }
-        // map.off();
+        rutasMapa.forEach(marcador => {
+            marcador.remove();
+        });
         todasRutas = data;
         createRoutes();
     });
@@ -84,38 +93,44 @@ function createRoutes() {
     if ((rutas.scrollTop + rutas.clientHeight) > (rutas.scrollHeight - 50) && !creandoImagenes) {
         creandoImagenes = true;
         // console.log(todasRutas);
-
-        todasRutas.filter((_, index) => {
-            return (index < mostrarDesde + 5 && index >= mostrarDesde);
-        })
-            .forEach(element => {
-                // console.log(element);
-                document.getElementById('rutas').innerHTML += `
-                <a class="link" href="detalleRuta.php?id=${element.id}">
-                <div class="rutaRecomendada" onclick="">
-                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
-                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
-                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
-    
-                    <div class="tituloPequeño titulo">${element.route_name}</div>
-                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
-    
-                    <div class="caract1">
-                        <div>Distancia: ${(element.distance / 1000).toFixed(2)}km</div>
-                        <div>Intensidad: Media</div>
-                    </div>
-                    <div class="caract2">
-                        <div>Tipo: ${element.circular ? 'Circular' : 'Lineal'}
+        if (todasRutas.length > 0) {
+            todasRutas.filter((_, index) => {
+                return (index < mostrarDesde + 5 && index >= mostrarDesde);
+            })
+                .forEach(element => {
+                    // console.log(element);
+                    document.getElementById('rutas').innerHTML += `
+                    <a class="link" href="detalleRuta.php?id=${element.id}">
+                    <div class="rutaRecomendada" onclick="">
+                        <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
+                        <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
+                        <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
+        
+                        <div class="tituloPequeño titulo">${element.route_name}</div>
+                        <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
+        
+                        <div class="caract1">
+                            <div>Distancia: ${(element.distance / 1000).toFixed(2)}km</div>
+                            <div>Intensidad: Media</div>
                         </div>
-                        <div>Desnivel: ${element.max_height - element.min_height}m</div>
+                        <div class="caract2">
+                            <div>Tipo: ${(element.circular == 1) ? 'Circular' : 'Lineal'}
+                            </div>
+                            <div>Desnivel: ${element.max_height - element.min_height}m</div>
+                        </div>
                     </div>
-                </div>
-                </a>`;
-                let marker = L.marker([element.start_lat, element.start_lon]).addTo(map);
-                marker.bindPopup(element.route_name);
-            });
-        mostrarDesde += 5;
-        creandoImagenes = false;
+                    </a>
+                    <br>`;
+                    let marker = L.marker([element.start_lat, element.start_lon]).addTo(map);
+                    marker.bindPopup(`<a class='link' href='detalleRuta.php?id=${element.id}'>${element.route_name}</a>`);
+                    rutasMapa.push(marker);
+                });
+            mostrarDesde += 5;
+            creandoImagenes = false;
+        } else {
+            document.getElementById('rutas').innerHTML += `<p>No hay niguna ruta que coincida con sus criterios de busqueda</p>`;
+        }
+
     }
 }
 

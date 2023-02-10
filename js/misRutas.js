@@ -1,4 +1,4 @@
-fetch(`http://localhost:3000/api/route?user=${sessionStorage.getItem('id')}`, {
+fetch(`../api/route?user=${sessionStorage.getItem('id')}`, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json;charset=utf-8',

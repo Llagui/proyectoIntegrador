@@ -40,7 +40,7 @@ document.getElementById('botonSesion').addEventListener('click', (e) => {
             "username": document.getElementById('usuario').value,
             "pass": document.getElementById('contraseña').value,
         }
-        fetch('http://localhost:3000/api/login', {
+        fetch('../api/login/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -55,6 +55,7 @@ document.getElementById('botonSesion').addEventListener('click', (e) => {
             //         return response.json();
             //         break;
             // }
+            console.log(response);
             return response.json();
         })
             .then(function (data) {

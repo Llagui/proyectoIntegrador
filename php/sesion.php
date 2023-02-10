@@ -28,9 +28,9 @@
             <label for="contraseña">Contraseña</label><br>
             <input type="password" name="contraseña" id="contraseña" class="campo"><br>
             <div id="errorContraseña"></div><br>
-
-            <div id="errorFormulario"></div><br>
             <center>
+                <div id="errorFormulario"></div><br>
+
                 <input type="submit" value="Iniciar Sesión" class="boton rojo" name="inicio" id="botonSesion">
                 <p>
                     ¿No tienes cuenta? <br>

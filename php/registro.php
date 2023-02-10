@@ -11,15 +11,15 @@
             <div id="pag1">
                 <h1>Registrate hoy para empezar a planificar tu próxima aventura</h1>
                 <label for="nombre">Nombre completo</label><br>
-                <input type="text" name="datos[nombre]" id="nombre" class="campo" maxlength="10"><br>
+                <input type="text" name="datos[nombre]" id="nombre" class="campo" maxlength="70"><br>
                 <div id="errorNombre"></div>
 
                 <label for="usuario">Usuario</label><br>
-                <input type="text" name="datos[usuario]" id="usuario" class="campo"><br>
+                <input type="text" name="datos[usuario]" id="usuario" class="campo" maxlength="50"><br>
                 <div id="errorUsuario"></div>
 
                 <label for="correo">Correo electronico</label><br>
-                <input type="text" name="datos[correo]" id="correo" class="campo"><br>
+                <input type="text" name="datos[correo]" id="correo" class="campo" maxlength="50"><br>
                 <div id="errorCorreo"></div>
 
                 <label for="contraseña">Contraseña</label><br>
@@ -72,11 +72,13 @@
                 </div>
 
                 <center>
-                    <br><br>
+                    <br>
+                    <div id="errorFormulario"></div>
+                    <br>
                     <input type="submit" value="Registrarse" class="boton rojo" name="registro" id='registro'>
                     <p><a href="sesion.php">Volver</a></p>
                 </center>
-                <div id="errorFormulario"></div>
+
             </div>
         </form>
     </div>

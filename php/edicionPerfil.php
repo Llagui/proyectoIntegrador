@@ -31,7 +31,7 @@
                 </label>
 
                 <label for="correo">
-                    Correo electronico<input type="text" name="datos[correo]" id="correo" class="campo">
+                    Correo electronico<input type="text" name="datos[correo]" id="correo" class="campo" maxlength="50">
                     <div id="errorCorreo"></div>
                 </label>
 
@@ -76,8 +76,9 @@
                 </label>
             </div>
             <br>
-            <div id="errorFormulario"></div>
             <center>
+            <div id="errorFormulario"></div>
+            
                 <input type="submit" value="Guardar cambios" class="boton rojo" name="registro" id='guardarCambios'><br>
 
         </form>

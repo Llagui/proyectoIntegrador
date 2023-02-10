@@ -10,7 +10,7 @@ function quitarVentanaEliminar(e) {
 }
 
 document.getElementById('confirmar').addEventListener("click", (e) => {
-    fetch(`http://localhost:3000/api/user?id=${sessionStorage.getItem('id')}`, {
+    fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
         method: 'DELETE',
         headers: {
             // 'Content-Type': 'application/json;charset=utf-8',
@@ -20,7 +20,7 @@ document.getElementById('confirmar').addEventListener("click", (e) => {
         .then(function (data) {
             console.log(data);
             if (data['success']) {
-                sessionStorage.clean();
+                sessionStorage.clear();
                 window.location = "index.php";
             } else {
                 let errorFormulario = document.getElementById('errorEliminar');
