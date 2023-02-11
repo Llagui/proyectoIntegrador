@@ -2,14 +2,20 @@
 require '../vendor/autoload.php';
 require_once('../clases/conexion.php');
 
-use ReallySimpleJWT\Token;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 $con = new Conexion();
-$secret = 'This 1s S3cr3T!';
 
-$token = getallheaders()['Authorization'];
+$key = 'This 1s S3cr3T!';
+$issuer = 'localhost';
 
-if (Token::validate($token, $secret) != null) {
+$jwt = getallheaders()['Authorization'];
+
+$decoded =(array) JWT::decode($jwt, new Key($key, 'HS256'));
+
+
+if ($decoded['user'] == $_GET['id']  ) {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if (isset($_GET['id'])) {
             $sql = "SELECT * from usuarios WHERE id = '{$_GET['id']}'";
@@ -50,10 +56,20 @@ if (Token::validate($token, $secret) != null) {
 
         $json = json_decode(file_get_contents('php://input'), true);
         
-        if (isset($json['email']) && isset($json['pass']) && isset($json['id'])) {
+        //No es obli9gatoria la contraseña pues queda claro que es el usuario por el JWT
+        //Solo se pone un nueva
+        if (isset($json['email'])  && isset($json['id'])) {
 
             $json['activities'] = implode(",", $json['activities']);
-            $sql = "UPDATE usuarios SET email = '{$json['email']}', pass = '{$json['pass']}', height = '{$json['height']}', weight = '{$json['weight']}', birthday = '{$json['birthday']}', activities = '{$json['activities']}' WHERE id = {$json['id']}";
+            $pass = hash('sha512',$json['pass']);
+            $sql = "UPDATE usuarios SET email = '{$json['email']}', height = '{$json['height']}', weight = '{$json['weight']}', birthday = '{$json['birthday']}', activities = '{$json['activities']}'";
+            
+            //Si se quiere cambiar la contraseña
+            if($json['pass'] != ''){
+                $sql .= ", pass = '{$pass}'";
+            }
+
+            $sql .=  "WHERE id = {$json['id']}";
 
             try {
                 $con->query($sql);

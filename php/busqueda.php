@@ -17,13 +17,12 @@
             <div class="scrollmenu">
                 <select name="ordenar" id="ordenar" placeholder="" class="boton azul" class="hs-firstname">
                     <option value="" selected>Ordenar por</option>
-                    <!-- No funcionan con la api actual -->
                     <option value="distancia+">&#129045; Distancia</option>
-                    <option value="distancia-">&#129047; Distancia </option>
-                    <option value="intensidad+">&#129045; Intensidad (nf)</option>
-                    <option value="intensidad-">&#129047; Intensidad (nf)</option>
+                    <option value="distancia-">&#129047; Distancia</option>
+                    <option value="intensidad+">&#129045; Intensidad</option>
+                    <option value="intensidad-">&#129047; Intensidad</option>
                     <option value="desnivel+">&#129045; Desnivel</option>
-                    <option value="desnivel-">&#129047; Desnivel </option>
+                    <option value="desnivel-">&#129047; Desnivel</option>
                 </select>
                 <select name="distancia" id="distancia" class="boton azul">
                     <option value="" style="border:solid 20px" selected>Distancia</option>
@@ -33,12 +32,12 @@
                     <option value="&min_dist=50000">50km - ∞km</option>
                 </select>
                 <select name="intensidad" id="intensidad" placeholder="Ordenar por" class="boton azul">
-                    <option value="" selected>Intensidad(nf)</option>
-                    <!-- No funcionan con la api actual -->
-                    <option value="">Baja</option>
-                    <option value="">Media</option>
-                    <option value="">Alta</option>
-                    <option value="">Muy alta</option>
+                    <option value="" selected>Intensidad</option>
+                    <option value="0">Sencilla</option>
+                    <option value="1">Baja</option>
+                    <option value="2">Media</option>
+                    <option value="3">Alta</option>
+                    <option value="4">Muy alta</option>
                 </select>
                 <select name="tipo" id="tipo" class="boton azul">
                     <option value="" selected>Tipo</option>
@@ -53,12 +52,12 @@
                     <option value="&min_slope=10000">10km - ∞km</option>
                 </select>
                 <select name="actividad por" id="actividad" placeholder="Ordenar por" class="boton azul">
-                    <option value="">Actividad(nf)</option>
+                    <option value="">Actividad</option>
                     <!-- No funcionan con la api actual -->
-                    <option value="">Senderismo</option>
-                    <option value="">Ciclismo</option>
-                    <option value="">Correr</option>
-                    <option value="">Montañismo</option>
+                    <option>Senderismo</option>
+                    <option>Ciclismo</option>
+                    <option>Correr</option>
+                    <option>Alpinismo</option>
                 </select>
             </div>
         </form>

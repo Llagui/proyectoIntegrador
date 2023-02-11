@@ -55,11 +55,11 @@ document.getElementById('botonSesion').addEventListener('click', (e) => {
             //         return response.json();
             //         break;
             // }
-            console.log(response);
+            // console.log(response);
             return response.json();
         })
             .then(function (data) {
-                console.log(data);
+                // console.log(data);
                 if (data['success']) {
                     sessionStorage.setItem("usuario", document.getElementById('usuario').value);
                     sessionStorage.setItem("id", data['id']);

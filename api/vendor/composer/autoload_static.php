@@ -7,16 +7,24 @@ namespace Composer\Autoload;
 class ComposerStaticInit5be36b78c99643199f77d890ff1a03d4
 {
     public static $prefixLengthsPsr4 = array (
-        'R' => 
+        'p' => 
         array (
-            'ReallySimpleJWT\\' => 16,
+            'phpGPX\\' => 7,
+        ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'ReallySimpleJWT\\' => 
+        'phpGPX\\' => 
         array (
-            0 => __DIR__ . '/..' . '/rbdwllr/reallysimplejwt/src',
+            0 => __DIR__ . '/..' . '/sibyx/phpgpx/src/phpGPX',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
     );
 

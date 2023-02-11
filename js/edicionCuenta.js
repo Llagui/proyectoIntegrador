@@ -10,8 +10,14 @@ fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
     return response.json()
 })
     .then(function (data) {
-        // console.log(data);
+        console.log(data);
         // datos = data;
+
+        // se ha cambiado algo en el sesion storage
+        if (data['msg'] == 'Token invalido') {
+            sessionStorage.clear();
+            window.location = "index.php";
+        }
         if (data) {
             document.getElementById('nombre').value = data['fullname'];
             document.getElementById('usuario').value = data['username'];
@@ -19,8 +25,8 @@ fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
             document.getElementById('estatura').value = data['height'];
             document.getElementById('peso').value = data['weight'];
             document.getElementById('fecha').value = data['birthday'];
-            document.getElementById('contraseña').value = data['pass'];
-            document.getElementById('repitaContraseña').value = data['pass'];
+            // document.getElementById('contraseña').value = data['pass'];
+            // document.getElementById('repitaContraseña').value = data['pass'];
             document.getElementById('senderismo').checked = data['activities'].some((item) => item == 'senderismo');
             document.getElementById('montañismo').checked = data['activities'].some((item) => item == 'montañismo');
             document.getElementById('ciclismo').checked = data['activities'].some((item) => item == 'ciclismo');

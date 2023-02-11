@@ -42,7 +42,7 @@
                 </label>
 
                 <label for="contraseña">
-                    Contraseña <input type="password" name="datos[contraseña]" id="contraseña" class="campo">
+                    Nueva contraseña <input type="password" name="datos[contraseña]" id="contraseña" class="campo">
                     <div id="seguridadContraseña"></div>
                     <div id="errorContraseña"></div>
                 </label>

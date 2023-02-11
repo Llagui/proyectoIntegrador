@@ -279,8 +279,13 @@ function guardarCambios(e) {
         activities,
     };
     let errores = correoError();
-    errores = contraseñaError() || errores;
-    errores = contraseñaRepetidaError() || errores;
+
+    // No compruebo esto porque con el jwt ya es suficiente para saber si es el usuario
+    // Y lo dejo por si alguien quiere cambiar su contraseña
+    // errores = contraseñaError() || errores;
+
+    // errores = contraseñaRepetidaError() || errores;
+    
     if (estatura.value != '') {
         errores = estaturaError() || errores;
     }
@@ -297,7 +302,7 @@ function guardarCambios(e) {
     // 'correr': document.getElementById('correr').checked,
     // console.log(errores);
     if (!errores) {
-        fetch('../api/user/', {
+        fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',

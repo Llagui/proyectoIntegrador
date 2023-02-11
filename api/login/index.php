@@ -2,10 +2,12 @@
 require '../vendor/autoload.php';
 require_once('../clases/conexion.php');
 
-use ReallySimpleJWT\Token;
+
+use Firebase\JWT\JWT;
 
 $con = new Conexion();
-$secret = 'This 1s S3cr3T!';
+
+$key = 'This 1s S3cr3T!';
 $issuer = 'localhost';
 
 $json = json_decode(file_get_contents('php://input'), true);
@@ -13,22 +15,29 @@ $json = json_decode(file_get_contents('php://input'), true);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($json['username']) && isset($json['pass'])) {
-        // $pass = hash('sha512',$json['pass']);
-        $sql = "SELECT id from usuarios WHERE username = '{$json['username']}' AND pass = '{$json['pass']}'";
+        $pass = hash('sha512', $json['pass']);
+        $sql = "SELECT id from usuarios WHERE username = '{$json['username']}' AND pass = '{$pass}'";
 
         try {
             $result = $con->query($sql)->fetch_all(MYSQLI_ASSOC);
 
             if ($result != null) {
+                $payload = [
+                    'iss' => $issuer,
+                    'user' => $result[0]['id']
+                ];
+
+                $jwt = JWT::encode($payload, $key, 'HS256');
                 $id = $result[0]['id'];
-                $token = Token::create($id, $secret, time() + 3600, $issuer);
+
+                // $token = Token::create($id, $secret, time() + 3600, $issuer);
                 header("HTTP/1.1 200 Success");
                 header("Content-Type: application/json");
                 echo json_encode([
                     'success' => true,
                     'id' => $id,
                     'msg' => "Se ha creado el usuario",
-                    'token' => $token
+                    'token' => $jwt
                 ]);
             } else {
                 header("HTTP/1.1 400 Bad Request");

@@ -98,7 +98,7 @@ $user = $con->query($sql2)->fetch_all(MYSQLI_ASSOC)[0];
                     ?>
                 </div>
                 <div>Tipo: <?php echo ($result['circular'] == 1) ? 'Circular' : 'Lineal'; ?></div>
-                <div>Desnivel: <?php echo $result['max_height'] - $result['min_height'] ?>m</div>
+                <div>Desnivel: <?php echo $result['slope'] ?>m</div>
                 <div>Tiempo: 3h</div>
             </div>
 

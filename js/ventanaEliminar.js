@@ -18,7 +18,7 @@ document.getElementById('confirmar').addEventListener("click", (e) => {
         }
     }).then((response) =>  response.json())
         .then(function (data) {
-            console.log(data);
+            // console.log(data);
             if (data['success']) {
                 sessionStorage.clear();
                 window.location = "index.php";
