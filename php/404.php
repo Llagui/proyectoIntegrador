@@ -1,3 +1,4 @@
+<main>
 <div class="container">
 <div class="row">
     <div class="col-sm-12 col-md-12 mt-5 mb-5">
@@ -630,3 +631,4 @@
     </div>
 </div>
 </div>
+</main>

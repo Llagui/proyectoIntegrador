@@ -283,7 +283,6 @@ function guardarCambios(e) {
     // No compruebo esto porque con el jwt ya es suficiente para saber si es el usuario
     // Y lo dejo por si alguien quiere cambiar su contraseña
     // errores = contraseñaError() || errores;
-
     // errores = contraseñaRepetidaError() || errores;
     
     if (estatura.value != '') {
@@ -295,12 +294,7 @@ function guardarCambios(e) {
     if (peso.value != '') {
         errores = pesoError() || errores;
     }
-
-    // 'senderismo': document.getElementById('senderismo').checked,
-    // 'montañismo': document.getElementById('montañismo').checked,
-    // 'ciclismo': document.getElementById('ciclismo').checked,
-    // 'correr': document.getElementById('correr').checked,
-    // console.log(errores);
+    
     if (!errores) {
         fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
             method: 'PUT',

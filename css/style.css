@@ -474,7 +474,7 @@ footer .logo {
     grid-column: 1/5;
     display: flex;
     align-self: center;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .imagenPrincipal {
@@ -1063,6 +1063,9 @@ footer .logo {
 }
 
 @media (max-width: 625px) {
+    .campo{
+        font-size: 18px;
+    }
     #cambioNombre {
         grid-column: 2;
     }
@@ -1129,7 +1132,6 @@ footer .logo {
     width: 100%;
     display: flex;
     margin: 0;
-
 }
 
 #mapa {
@@ -1402,7 +1404,7 @@ footer .logo {
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 470px) {
     #misRutas #botones .boton {
         width: 100px;
     }
@@ -1431,6 +1433,7 @@ footer .logo {
 #detalleRutas #descripcion {
     text-align: justify;
     overflow-wrap: break-word;
+    padding: 0 10px;
 }
 
 #detalleRutas .rutaRecomendada {
@@ -1539,6 +1542,10 @@ footer .logo {
     width: fit-content;
 }
 
+#detalleRutas #rutasRecomendadas{
+    display: block;
+}
+
 @media (max-width: 900px) {
     #detalleRutas {
         grid-template-columns: 2fr 1fr;
@@ -1603,9 +1610,12 @@ footer .logo {
     }
 }
 
+
+
 /* GIF trabajando */
 #trabajando {
-    height: 20vw;
+    height: 200px;
+    border-radius: 20px;
 }
 
 /*****************

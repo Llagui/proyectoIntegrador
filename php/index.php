@@ -7,10 +7,14 @@
         </form>
 
     </div>
+
+
+
     <section>
         <h2>Rutas recomendadas</h2>
         <div id="rutasRecomendadas">
-            <a class="link" href="detalleRuta.php">
+            
+            <!-- <a class="link" href="detalleRuta.php">
                 <div class="rutaRecomendada">
                     <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
                     <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
@@ -67,7 +71,7 @@
                         <div>Desnivel: 100m</div>
                     </div>
                 </div>
-            </a>
+            </a> -->
         </div>
     </section>
     
@@ -83,10 +87,10 @@
                         <div class="textoSombra">Senderismo</div>
                     </div>
                 </a>
-                <a class="link actividad" href="busqueda.php?activity=montañismo">
+                <a class="link actividad" href="busqueda.php?activity=alpinismo">
                     <div>
                         <img src="../img/montanismo.jpg" alt="">
-                        <div class="textoSombra">Montañismo</div>
+                        <div class="textoSombra">Alpinismo</div>
                     </div>
                 </a>
                 <a class="link actividad" href="busqueda.php?activity=correr">
@@ -138,10 +142,10 @@
             </div>
         </div>
     </section>
-<br>
+    <br>
     <section id="caracteristicas">
         <!-- <h2>¿Cómo funciona?</h2> -->
-        
+
         <div>
             <img src="../Iconos/fingerprint.svg" alt="" class="rojo">
             <h2>Registrate</h2>
@@ -197,3 +201,5 @@
 </main>
 <script src="../js/desplazamientoImg.js"></script>
 <script src="../js/buscar.js"></script>
+<script src="../js/rutasRecomendadas.js"></script>
+<script>rutasRecomendadas(3);</script>

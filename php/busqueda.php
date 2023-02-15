@@ -5,7 +5,7 @@
                 <input type="submit" value="" class="azul " id="circulo">
                 <input type="image" src="../Iconos/search.svg" class="iconoPequeño" id="lupa">
                 <?php
-                if ($_GET != null && $_GET['name'] != '') {
+                if (isset($_GET['name']) && $_GET['name'] != '') {
                     echo '<input id="busqueda" value="' . $_GET["name"] . '">';
                 } else {
                     echo '<input id="busqueda">';
@@ -15,7 +15,7 @@
             </div>
 
             <div class="scrollmenu">
-                <select name="ordenar" id="ordenar" placeholder="" class="boton azul" class="hs-firstname">
+                <select name="ordenar" id="ordenar" class="boton azul" class="hs-firstname">
                     <option value="" selected>Ordenar por</option>
                     <option value="distancia+">&#129045; Distancia</option>
                     <option value="distancia-">&#129047; Distancia</option>
@@ -31,7 +31,7 @@
                     <option value="&min_dist=20000&max_dist=50000">20km - 50km</option>
                     <option value="&min_dist=50000">50km - ∞km</option>
                 </select>
-                <select name="intensidad" id="intensidad" placeholder="Ordenar por" class="boton azul">
+                <select name="intensidad" id="intensidad" class="boton azul">
                     <option value="" selected>Intensidad</option>
                     <option value="0">Sencilla</option>
                     <option value="1">Baja</option>
@@ -44,20 +44,25 @@
                     <option value="true">Circular</option>
                     <option value="false">Lineal</option>
                 </select>
-                <select name="desnivel" id="desnivel" placeholder="Ordenar por" class="boton azul">
+                <select name="desnivel" id="desnivel" class="boton azul">
                     <option value="" selected>Desnivel</option>
                     <option value="&min_slope=0&max_slope=1000">0m - 1km</option>
                     <option value="&min_slope=1000&max_slope=5000">1km - 5km</option>
                     <option value="&min_slope=5000&max_slope=10000">5km - 10km</option>
                     <option value="&min_slope=10000">10km - ∞km</option>
                 </select>
-                <select name="actividad por" id="actividad" placeholder="Ordenar por" class="boton azul">
+                <select name="actividad por" id="actividad" class="boton azul">
                     <option value="">Actividad</option>
-                    <!-- No funcionan con la api actual -->
-                    <option>Senderismo</option>
-                    <option>Ciclismo</option>
-                    <option>Correr</option>
-                    <option>Alpinismo</option>
+                    <?php
+                    $actividades = ['Senderismo', 'Ciclismo', 'Correr', 'Alpinismo'];
+                    foreach ($actividades as $key => $value) {
+                        if (isset($_GET['activity']) && $_GET['activity'] == strtolower($value)) {
+                            echo "<option selected>{$value}</option>";
+                        } else {
+                            echo "<option>{$value}</option>";
+                        }
+                    }
+                    ?>
                 </select>
             </div>
         </form>

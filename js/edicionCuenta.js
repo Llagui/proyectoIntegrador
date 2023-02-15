@@ -2,7 +2,6 @@
 fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
     method: 'GET',
     headers: {
-        'Content-Type': 'application/json;charset=utf-8',
         'Authorization': `${sessionStorage.getItem('token')}`,
     },
 }).then((response) => {
@@ -10,7 +9,7 @@ fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
     return response.json()
 })
     .then(function (data) {
-        console.log(data);
+        // console.log(data);
         // datos = data;
 
         // se ha cambiado algo en el sesion storage
@@ -18,7 +17,8 @@ fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
             sessionStorage.clear();
             window.location = "index.php";
         }
-        if (data) {
+        if (data['user']) {
+            data = data['user'];
             document.getElementById('nombre').value = data['fullname'];
             document.getElementById('usuario').value = data['username'];
             document.getElementById('correo').value = data['email'];

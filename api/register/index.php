@@ -5,18 +5,19 @@ require_once('../clases/conexion.php');
 use Firebase\JWT\JWT;
 
 $con = new Conexion();
-
 $key = 'This 1s S3cr3T!';
 $issuer = 'localhost';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
     $json = json_decode(file_get_contents('php://input'), true);
+
     if (isset($json['fullname']) && isset($json['username']) && isset($json['email']) && isset($json['pass'])) {
+        //implosionar array para guardarlo mas falimente
         $json['activities'] = implode(",", $json['activities']);
+        //Hashear contraseña
         $pass = hash('sha512',$json['pass']);
         $sql = "INSERT INTO usuarios (username, fullname, email, pass, height, weight, birthday, activities) VALUES ('{$json['username']}','{$json['fullname']}','{$json['email']}','{$pass}','{$json['height']}','{$json['weight']}','{$json['birthday']}','{$json['activities']}')";
-        // echo $sql;
+        
         try {
             $con->query($sql);
             $id = $con->insert_id;
@@ -24,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'iss' => $issuer,
                 'user' => $id
             ];
-
             $jwt = JWT::encode($payload, $key, 'HS256');
             
             header("HTTP/1.1 200 Created");
@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo json_encode([
                 'success' => true,
                 'id' => $id,
-                'msg' => "Se ha creado el usuario",
                 'token' => $jwt
             ]);
         } catch (mysqli_sql_exception $e) {
@@ -43,12 +42,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ]);
         }
     } else {
-        header("HTTP/1.1 400 Bad Request");
+        header("HTTP/1.1 403 Error");
         header("Content-Type: application/json");
         echo json_encode([
             'success' => false,
-            'msg' => "Alguno de los campos requeridos está vacío",
+            'msg' => "Campo requerido vacío",
         ]);
     }
-    
+}else {
+    header("HTTP/1.1 400 Bad Request");
+    header("Content-Type: application/json");
+    echo json_encode([
+        'success' => false,
+        'msg' => "Metodo incorrecto para llamada"
+    ]);
 }

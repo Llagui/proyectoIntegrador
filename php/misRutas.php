@@ -28,11 +28,11 @@
                 <select name="ordenar" id="ordenar" placeholder="" class="boton azul" class="hs-firstname">
                     <option value="" selected>Ordenar por</option>
                     <option value="distancia+">&#129045; Distancia</option>
-                    <option value="distancia-">&#129047; Distancia </option>
-                    <option value="intensidad+">&#129045; Intensidad (nf)</option>
-                    <option value="intensidad-">&#129047; Intensidad (nf)</option>
+                    <option value="distancia-">&#129047; Distancia</option>
+                    <option value="intensidad+">&#129045; Intensidad</option>
+                    <option value="intensidad-">&#129047; Intensidad</option>
                     <option value="desnivel+">&#129045; Desnivel</option>
-                    <option value="desnivel-">&#129047; Desnivel </option>
+                    <option value="desnivel-">&#129047; Desnivel</option>
                 </select>
                 <select name="distancia" id="distancia" class="boton azul">
                     <option value="" style="border:solid 20px" selected>Distancia</option>
@@ -42,7 +42,7 @@
                     <option value="&min_dist=50000">50km - ∞km</option>
                 </select>
                 <select name="intensidad" id="intensidad" placeholder="Ordenar por" class="boton azul">
-                    <option value="" selected>Intensidad(nf)</option>
+                    <option value="" selected>Intensidad</option>
                     <!-- No funcionan con la api actual -->
                     <option value="0">Sencilla</option>
                     <option value="1">Baja</option>

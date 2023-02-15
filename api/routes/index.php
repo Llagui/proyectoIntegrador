@@ -8,14 +8,7 @@ use phpGPX\phpGPX;
 
 $key = 'This 1s S3cr3T!';
 $issuer = 'localhost';
-
-$jwt = getallheaders()['Authorization'];
-
-$decoded = (array) JWT::decode($jwt, new Key($key, 'HS256'));
-
 $con = new Conexion();
-
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sql = "SELECT * FROM rutas WHERE 1 ";
@@ -49,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $sql .= "AND intensity = {$_GET['intensity']} ";
     }
 
+    // true|false
     if (isset($_GET['activity'])) {
         $sql .= "AND activity = '{$_GET['activity']}' ";
     }
@@ -57,35 +51,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['user'])) {
         $sql .= "AND user = {$_GET['user']} ";
     }
-    // echo $sql;
+
     try {
         $result = $con->query($sql)->fetch_all(MYSQLI_ASSOC);
 
         if ($result != null) {
             header("HTTP/1.1 200 Success");
             header("Content-Type: application/json");
-            echo json_encode($result);
+            echo json_encode([
+                'success' => true,
+                'rutas' => $result
+            ]);
         } else {
-            header("HTTP/1.1 404 Not found");
+            header("HTTP/1.1 401 Route Error");
             echo json_encode([
                 'success' => false,
-                'msg' => "No se encuentra la ruta. Inténtelo de nuevo más tarde",
+                'msg' => "Datos de ruta incorrectos",
             ]);
         }
     } catch (mysqli_sql_exception $e) {
-        header("HTTP/1.1 400 Bad Request");
+        header("HTTP/1.1 404 Not Found");
         echo json_encode([
             'success' => false,
-            'msg' => "Datos de ruta incorrectos",
+            'msg' => "No se encuentran las rutas. Inténtelo de nuevo más tarde",
         ]);
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+    $jwt = getallheaders()['Authorization'];
+    $decoded = (array) JWT::decode($jwt, new Key($key, 'HS256'));
     //envio los datos en la cabezera pq es necesario enviar el gpx en el body
     $datos = (array) json_decode(getallheaders()['Data']);
-    // print_r($datos);
+    
     if ($decoded['user'] == (int) $datos['user']) {
-        //creacion gpx
         $rutaGPX = "../gpx/" . date_timestamp_get(date_create()) . ".gpx";
+        
+        //creacion gpx
         move_uploaded_file($_FILES['file']['tmp_name'], $rutaGPX);
 
         // Obtencion de datos del GPX
@@ -100,7 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
 
         $sql = "INSERT INTO `rutas`( `route_name`, `distance`, `slope`, `circular`, `start_lat`, `start_lon`, `user`, `desc`, `intensity`, `activity`, `gpx`) VALUES ('{$datos['route_name']}','{$gpxArray['realDistance']}','{$gpxArray['cumulativeElevationGain']}','{$datos['circular']}','{$primerPunto['latitude']}','{$primerPunto['longitude']}','{$datos['user']}','{$datos['desc']}','{$datos['intensity']}','{$datos['activity']}','{$rutaGPX}')";
-
 
         try {
             $con->query($sql);
@@ -120,22 +120,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ]);
         }
     } else {
-        header("HTTP/1.1 400 Bad Request");
+        header("HTTP/1.1 403 Error");
         header("Content-Type: application/json");
         echo json_encode([
             'success' => false,
             'msg' => "Token no valido. Intentelo de nuevo más tarde",
         ]);
-
-        exit;
     }
 } else {
     header("HTTP/1.1 400 Bad Request");
     header("Content-Type: application/json");
     echo json_encode([
         'success' => false,
-        'msg' => "Id no enviado",
+        'msg' => "Metodo incorrecto para llamada"
     ]);
-
-    exit;
 }

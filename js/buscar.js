@@ -101,8 +101,8 @@ function busqueda(e) {
         return response.json();
         // }
     }).then(function (data) {
-        // console.log(data);
-        if (data.length >= 2) {
+        console.log(data);
+        if (data['success'] && data['rutas'].length >= 2) {
             switch (ordenar.value) {
                 case 'distancia+':
                     data = data.sort((a, b) => b.distance - a.distance);
@@ -123,19 +123,24 @@ function busqueda(e) {
                     data = data.sort((a, b) => a.intensity - b.intensity);
                     break;
             }
+            
+        } 
+        if(data['success']){
+        todasRutas = data['rutas'];
+        }else {
+            todasRutas = [];
         }
 
         rutasMapa.forEach(marcador => {
             marcador.remove();
         });
-        todasRutas = data;
+
 
         createRoutes();
     });
 }
 
 function createRoutes() {
-
     if ((rutas.scrollTop + rutas.clientHeight) > (rutas.scrollHeight - 50) && !creandoImagenes) {
         creandoImagenes = true;
         // console.log(todasRutas);
@@ -163,6 +168,7 @@ function createRoutes() {
                     }
 
                     //Sqgun donde este varia la forma de mostrar las rutas
+                    
                     if (window.globalThis.location.pathname != '/proyecto%20Integrador/php/misRutas.php') {
                         document.getElementById('rutas').innerHTML += `
                             <a class="link" href="detalleRuta.php?id=${element.id}">
@@ -187,7 +193,14 @@ function createRoutes() {
                             </a>
                             <br>`;
 
-                        let marker = L.marker([element.start_lat, element.start_lon]).addTo(map);
+                        let icono = L.icon({
+                            iconUrl: `../marcadores/${element.activity}.png`,
+                            iconSize: [30, 40],
+                            iconAnchor: [15, 40],
+                            popupAnchor: [0, -40]
+                        });
+
+                        let marker = L.marker([element.start_lat, element.start_lon], { icon: icono }).addTo(map);
                         marker.bindPopup(`<a class='link' href='detalleRuta.php?id=${element.id}'>${element.route_name}</a>`);
                         rutasMapa.push(marker);
 
@@ -204,10 +217,12 @@ function createRoutes() {
                                 ${element.desc}
                                 </div>
                                 <div class="caract1">
+                                <br>
                                     <div>Distancia: ${(element.distance / 1000).toFixed(2)}km</div>
                                     <div>Intensidad: ${intensidad}</div>
                                 </div>
                                 <div class="caract2">
+                                <br>
                                     <div>Tipo: ${element.circular ? 'Circular' : 'Lineal'}</div>
                                     <div>Desnivel:${element.slope}m</div>
                                 </div>
