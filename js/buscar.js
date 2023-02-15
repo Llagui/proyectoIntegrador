@@ -101,33 +101,33 @@ function busqueda(e) {
         return response.json();
         // }
     }).then(function (data) {
-        console.log(data);
+        // console.log(data);
         if (data['success'] && data['rutas'].length >= 2) {
             switch (ordenar.value) {
                 case 'distancia+':
-                    data = data.sort((a, b) => b.distance - a.distance);
+                    data['rutas'] = data['rutas'].sort((a, b) => b.distance - a.distance);
                     break;
                 case 'distancia-':
-                    data = data.sort((a, b) => a.distance - b.distance);
+                    data['rutas'] = data['rutas'].sort((a, b) => a.distance - b.distance);
                     break;
                 case 'desnivel+':
-                    data = data.sort((a, b) => (b.max_height - b.min_height) - (a.max_height - a.min_height));
+                    data['rutas'] = data['rutas'].sort((a, b) => (b.max_height - b.min_height) - (a.max_height - a.min_height));
                     break;
                 case 'desnivel-':
-                    data = data.sort((a, b) => (a.max_height - a.min_height) - (b.max_height - b.min_height));
+                    data['rutas'] = data['rutas'].sort((a, b) => (a.max_height - a.min_height) - (b.max_height - b.min_height));
                     break;
                 case 'intensidad+':
-                    data = data.sort((a, b) => b.intensity - a.intensity);
+                    data['rutas'] = data['rutas'].sort((a, b) => b.intensity - a.intensity);
                     break;
                 case 'intensidad-':
-                    data = data.sort((a, b) => a.intensity - b.intensity);
+                    data['rutas'] = data['rutas'].sort((a, b) => a.intensity - b.intensity);
                     break;
             }
-            
-        } 
-        if(data['success']){
-        todasRutas = data['rutas'];
-        }else {
+
+        }
+        if (data['success']) {
+            todasRutas = data['rutas'];
+        } else {
             todasRutas = [];
         }
 
@@ -168,7 +168,7 @@ function createRoutes() {
                     }
 
                     //Sqgun donde este varia la forma de mostrar las rutas
-                    
+
                     if (window.globalThis.location.pathname != '/proyecto%20Integrador/php/misRutas.php') {
                         document.getElementById('rutas').innerHTML += `
                             <a class="link" href="detalleRuta.php?id=${element.id}">
