@@ -3,10 +3,15 @@ $uri = "http://localhost/proyecto%20Integrador/api/route/?id={$_GET['id']}";
 
 $consulta =  (array) json_decode(file_get_contents($uri));
 
+//si la consulta a la api ha sido un exito
 if (@$consulta['success']) {
+    //Caracteristicas principales
     $result = (array)json_decode($consulta['ruta']);
+    //Caracteristicas usuario
     $user = (array) json_decode($consulta['usuario']);
+    //Puntos de la ruta
     $arrayPuntos = (array) json_decode($consulta['puntos']);
+    //Caracteristicas secundarias
     $gpxArray = (array) json_decode($consulta['estadisticas']);
 ?>
     <main>
@@ -26,6 +31,7 @@ if (@$consulta['success']) {
                 <h3 id="nombreUsuario">
                     <!-- Cuando ponga imagenes a los usuarios  -->
                     <img src="../Iconos/person-fill.svg" alt="" class="imagenPerfil" />
+                    <!-- Para que si un usuario elimina su cuenta y tiene rutas las rutas de ese usuario salgan como anonimo -->
                     &nbsp;<?php echo(@$user['username'] ? $user['username'] : 'Anonimo'); ?>
                 </h3>
                 <div class="rutaRecomendada">
@@ -34,6 +40,7 @@ if (@$consulta['success']) {
                     <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
                 </div>
                 <br>
+                <!-- Botones con acciones relativas a la ruta -->
                 <div id="botones">
                     <a target="_blank" href="https://www.visualcrossing.com/weather-history/<?php echo $result['start_lat']; ?>, <?php echo $result['start_lon']; ?>/metric/next7days">
                         <button class="boton rojo">
@@ -128,6 +135,7 @@ if (@$consulta['success']) {
     </main>
     <script src="../js/rutasRecomendadas.js"></script>
     <script>
+        //Generar una ruta recomendada que se pondra en la seccion de ruta sugerida
         rutasRecomendadas(1);
     </script>
     <script>

@@ -1,4 +1,6 @@
 <?php
+// GET Devuelve un listado con todas las rutas y sus caracteristicas principales
+// POST Crear una ruta
 require '../vendor/autoload.php';
 require_once('../clases/conexion.php');
 
@@ -42,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $sql .= "AND intensity = {$_GET['intensity']} ";
     }
 
-    // true|false
     if (isset($_GET['activity'])) {
         $sql .= "AND activity = '{$_GET['activity']}' ";
     }
@@ -77,19 +78,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         ]);
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+
     $jwt = getallheaders()['Authorization'];
     $decoded = (array) JWT::decode($jwt, new Key($key, 'HS256'));
     //envio los datos en la cabezera pq es necesario enviar el gpx en el body
     $datos = (array) json_decode(getallheaders()['Data']);
-    
+
+    // Compruebo que el token es valido
     if ($decoded['user'] == (int) $datos['user']) {
         $rutaGPX = "../gpx/" . date_timestamp_get(date_create()) . ".gpx";
-        
-        //creacion gpx
+
+        //movimiento del gpx
         move_uploaded_file($_FILES['file']['tmp_name'], $rutaGPX);
 
-        // Obtencion de datos del GPX
+        // Obtencion de datos del GPX para insercion
         $gpx = new phpGPX();
         $file = $gpx->load($rutaGPX);
         $circular = true;

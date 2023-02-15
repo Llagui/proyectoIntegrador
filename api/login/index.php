@@ -1,4 +1,5 @@
 <?php
+// Inicia sesion y devuelve un token
 require '../vendor/autoload.php';
 require_once('../clases/conexion.php');
 
@@ -10,16 +11,20 @@ $issuer = 'localhost';
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Obtencion del body de la llamada
     $json = json_decode(file_get_contents('php://input'), true);
 
     if (isset($json['username']) && isset($json['pass'])) {
+        // Las contraseñas en la base de datos estan cifradas, la cifro ahora
         $pass = hash('sha512', $json['pass']);
         $sql = "SELECT id from usuarios WHERE username = '{$json['username']}' AND pass = '{$pass}'";
 
         try {
             $result = $con->query($sql)->fetch_all(MYSQLI_ASSOC);
 
+            // Comprobacion de que hay un usuario con esos credenciales
             if ($result) {
+                // Generacion del token
                 $id = $result[0]['id'];
                 $payload = [
                     'iss' => $issuer,

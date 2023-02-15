@@ -1,4 +1,5 @@
 <?php
+// Comprueba que el nombre de suario no este cogido
 require_once('../clases/conexion.php');
 
 $con = new Conexion();
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         ]);
     }
     exit;
-}else {
+} else {
     header("HTTP/1.1 400 Bad Request");
     header("Content-Type: application/json");
     echo json_encode([

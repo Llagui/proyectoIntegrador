@@ -1,4 +1,7 @@
 <?php
+// GET Devuelve un array con todos los datos del usuario menos la contraseña
+// PUT Modificacion de los datos de un usuario
+// DELETE Eliminacion de un usuario(id) 
 require '../vendor/autoload.php';
 require_once('../clases/conexion.php');
 
@@ -11,7 +14,7 @@ $issuer = 'localhost';
 $jwt = getallheaders()['Authorization'];
 $decoded = (array) JWT::decode($jwt, new Key($key, 'HS256'));
 
-
+// Comprobacion del token
 if ($decoded['user'] == $_GET['id']) {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if (isset($_GET['id'])) {
@@ -19,6 +22,7 @@ if ($decoded['user'] == $_GET['id']) {
 
             try {
                 $result = $con->query($sql)->fetch_all(MYSQLI_ASSOC);
+                // Guardar actividades como cadena con comas
                 $result[0]['activities'] = explode(',', $result[0]['activities']);
 
                 if ($result != null) {
@@ -55,10 +59,11 @@ if ($decoded['user'] == $_GET['id']) {
         $json = json_decode(file_get_contents('php://input'), true);
 
         //No es obligatoria la contraseña pues queda claro que es el usuario por el JWT
-        //Solo se pone un nueva
+        //Solo son obligatorios el email e id 
         if (isset($json['email'])  && isset($json['id'])) {
 
             $json['activities'] = implode(",", $json['activities']);
+            // Cifrado de contraseñas para la base de datos
             $pass = hash('sha512', $json['pass']);
             $sql = "UPDATE usuarios SET email = '{$json['email']}', height = '{$json['height']}', weight = '{$json['weight']}', birthday = '{$json['birthday']}', activities = '{$json['activities']}'";
 

@@ -1,4 +1,5 @@
 <?php
+// Devuelve todos los datos de una ruta(pasandole su id)
 require '../vendor/autoload.php';
 require_once('../clases/conexion.php');
 
@@ -14,28 +15,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $arrayPuntos = [];
             $user = [];
             $result = $con->query($sql)->fetch_all(MYSQLI_ASSOC)[0];
-            // print_r($result);
+
             if ($result) {
+                // Selccionar el usuario que subio la ruta
                 $sql2 = "SELECT username from usuarios WHERE id = '{$result['user']}'";
                 $user = @$con->query($sql2)->fetch_all(MYSQLI_ASSOC)[0];
 
-                //guardar las estadisticas secundarias
-                
+                //Recorrer el gpx asociado y sacar las estadisticas secundarias
                 $gpx = new phpGPX();
                 $file = $gpx->load($result['gpx']);
                 foreach ($file->tracks as $track) {
                     $gpxArray = $track->stats->toArray();
                 }
 
-                //guardar las array con los puntos
+                // array con los puntos
                 $puntos = (array) $file->tracks[0]->segments[0]->points;
-                
                 $pos = 0;
                 foreach ($puntos as $sample_point) {
                     $arrayPuntos[$pos][] = $sample_point->latitude;
                     $arrayPuntos[$pos][] = $sample_point->longitude;
                     $pos++;
                 }
+
                 header("HTTP/1.1 200 Success");
                 header("Content-Type: application/json");
                 echo json_encode([
