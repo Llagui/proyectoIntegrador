@@ -5,7 +5,7 @@
     }
 </script>
 <main id="contenedor">
-    <img src="../img/pexels-oziel-gómez-840667.jpg" alt="" class="imgFondoDerecha">
+    <img src="../img/pexels-oziel-gomez-840667.jpg" alt="" class="imgFondoDerecha">
 
     <div class="azul" id="formularioCambios">
         <form action="registro.php" method="post"  enctype="multipart/form-data">
@@ -102,7 +102,7 @@
 
     <img src="../img/pexels-rrinna-2071553.jpg" alt="" class="imgFondoIzquierda">
 </main>
-<script src="../js/seguridadContraseña.js"></script>
+<script src="../js/seguridadContrasena.js"></script>
 <script src="../js/registro.js"></script>
 <script src="../js/ventanaEliminar.js"></script>
 <script src="../js/edicionCuenta.js"></script>

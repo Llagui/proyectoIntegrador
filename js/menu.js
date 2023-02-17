@@ -1,7 +1,7 @@
 if (sessionStorage.getItem('id') != null) {
     document.getElementById('inicioSesion').innerHTML = `
     <button class="azul boton" id= 'desplegable'>
-        <img src="../iconos/person-fill.svg" class="iconoPequeño">
+        <img src="../Iconos/person-fill.svg" class="iconoPequeño">
         <span>&nbsp;&nbsp;Mi cuenta</span>
     </button>
     <div id="menu" class="azul">
@@ -19,7 +19,7 @@ if (sessionStorage.getItem('id') != null) {
     document.getElementById('inicioSesion').innerHTML = `
     <a class="link" href="sesion.php">
         <button class="azul boton" id="desplegable">
-            <img src="../iconos/person-fill.svg" class="iconoPequeño">
+            <img src="../Iconos/person-fill.svg" class="iconoPequeño">
             <span>&nbsp;&nbsp;Iniciar sesión</span>
         </button>
     </a>`;

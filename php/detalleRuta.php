@@ -1,4 +1,6 @@
 <?php
+// Activar en el servidor
+// $uri = "http://roadrunner.local/api/route/?id={$_GET['id']}";
 $uri = "http://localhost/proyecto%20Integrador/api/route/?id={$_GET['id']}";
 
 $consulta =  (array) json_decode(file_get_contents($uri));

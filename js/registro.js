@@ -58,6 +58,7 @@ function correoError() {
     } else {
         errorCorreo.classList.add('error');
         errorCorreo.textContent = "Email incorrecto";
+        errorEnCorreo = true;
     }
     return errorEnCorreo;
 }
@@ -279,7 +280,7 @@ function guardarCambios(e) {
         activities,
     };
     let errores = correoError();
-
+    console.log(correoError());
     // No compruebo esto porque con el jwt ya es suficiente para saber si es el usuario
     // Y lo dejo por si alguien quiere cambiar su contraseña
     // errores = contraseñaError() || errores;

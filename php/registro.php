@@ -84,5 +84,5 @@
     </div>
     <img src="../img/pexels-lan-yao-13103876.jpg" alt="" class="imgFondoDerecha">
 </main>
-<script src="../js/seguridadContraseña.js"></script>
+<script src="../js/seguridadContrasena.js"></script>
 <script src="../js/registro.js"></script>

@@ -74,7 +74,9 @@ function busqueda(e) {
 
     mostrarDesde = 0;
     let ruta = '../api/routes/?';
-    // console.log(window.globalThis.location );
+    console.log(window.globalThis.location.pathname );
+    // Activar en el servidor
+    // if (window.globalThis.location.pathname == '/php/index.php' || window.globalThis.location.pathname == '/php/') {
     if (window.globalThis.location.pathname == '/proyecto%20Integrador/php/index.php' || window.globalThis.location.pathname == '/proyecto%20Integrador/php/') {
         window.location = `./busqueda.php?name=${nombre.value}`;
     } else if (window.globalThis.location.pathname == '/proyecto%20Integrador/php/misRutas.php') {
@@ -168,7 +170,8 @@ function createRoutes() {
                     }
 
                     //Sqgun donde este varia la forma de mostrar las rutas
-
+                    // Activar en el servidor
+                    // if (window.globalThis.location.pathname != '/php/misRutas.php') {
                     if (window.globalThis.location.pathname != '/proyecto%20Integrador/php/misRutas.php') {
                         document.getElementById('rutas').innerHTML += `
                             <a class="link" href="detalleRuta.php?id=${element.id}">
