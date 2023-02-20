@@ -3,8 +3,8 @@
         <img src="../logos/image.png" class="imagenLogo" alt="logo">
         <span>&nbsp;&nbsp;ROAD RUNNER</span>
     </a>
-    <!-- 480 768 1200 -->
-    <br><!-- Susutituir br por margin -->
+
+    <br>
     <div></div>
     <div id="primeraColumna">
         <div id="RRSS">
@@ -26,10 +26,12 @@
         </div>
         <br>
         <div id="usos">
-            <div class="boton rojo">
-                <img src="../Iconos/router.svg" alt="youtube" class="iconoPequeño">
-                <span>&nbsp;&nbsp;On-Line</span>
-            </div>
+            <a href="../php/busqueda.php">
+                <div class="boton rojo">
+                    <img src="../Iconos/router.svg" alt="youtube" class="iconoPequeño">
+                    <span>&nbsp;&nbsp;On-Line</span>
+                </div>
+            </a>
             <div class="boton rojo">
                 <img src="../Iconos/apple.svg" alt="youtube" class="iconoPequeño">
                 <span>&nbsp;&nbsp;App store</span>
@@ -42,20 +44,18 @@
     </div>
 
     <div id="segundaColumna">
-        <span class="tituloPequeño">EMPRESA</span>
-        <ul>
-            <li>Acerca de</li>
-            <li>Únete al equipo</li>
-            <li>Prensa</li>
+        <span class="tituloPequeño">NAVEGACIÓN</span>
+        <!-- Menu navegacion -->
+        <ul id="navegacion">
         </ul>
     </div>
     <div id="terceraColumna">
         <span class="tituloPequeño">ENLACES ÚTILES</span>
         <ul>
-            <li>Soporte técnico</li>
+            <li>Acerca de</li>
+            <li>Únete al equipo</li>
             <li>Contacto</li>
             <li>Road Runner +</li>
-            <li>Desarrolladores</li>
         </ul>
     </div>
     <div id="cuartaColumna">
@@ -68,6 +68,22 @@
     </div>
 
 </footer>
+<script>
+    if (sessionStorage.getItem('id') != null) {
+        document.getElementById('navegacion').innerHTML = `
+        <li><a href="../php/busqueda.php">Busqueda rutas</a></li> 
+        <li><a href="../php/edicionPerfil.php">Configuracion de cuenta</a></li> 
+        <li><a href="../php/misRutas.php">Mis rutas</a></li>
+        <li><a href="../php/subirRuta.php">Subir ruta</a></li>
+        `;
+    } else {
+        document.getElementById('navegacion').innerHTML = `
+            <li><a href="../php/busqueda.php">Busqueda rutas</a></li> 
+            <li><a href="../php/sesion.php">Iniciar sesión</a></li> 
+            <li><a href="../php/registro.php">Registrarse</a></li> 
+        `;
+    }
+</script>
 </body>
 
 </html>

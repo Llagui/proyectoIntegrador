@@ -1,4 +1,5 @@
 <script>
+    // redireccion si intenta acceder un usuario que ha iniciado sesion
     if (sessionStorage.getItem("usuario") != null) {
         window.location = "index.php";
     }
@@ -24,12 +25,7 @@
 
                 <label for="contraseña">Contraseña</label><br>
                 <input type="password" name="datos[contraseña]" id="contraseña" class="campo"><br>
-                <div id="seguridadContraseña">
-                    <!-- 
-                        barra progreso seguridad contraseñas si tengo tiempo
-                        <progress id="file" max="100" value="0" id="progresoContraseña"> </progress> 
-                    -->
-                </div>
+                <div id="seguridadContraseña"></div> 
                 <div id="errorContraseña"></div>
 
                 <label for="repitaContraseña">Repita la contraseña</label><br>
@@ -44,11 +40,11 @@
             <div id="pag2">
                 <h1>Rellena estos datos para una expreriencia personalizada</h1>
                 <label for="estatura">Estatura (cm)</label><br>
-                <input type="number" name="datos[estatura]" id="estatura" class="campo"><br>
+                <input type="number" name="datos[estatura]" id="estatura" class="campo" min="100" max="230"><br>
                 <div id="errorEstatura"></div>
 
                 <label for="peso">Peso (kg)</label><br>
-                <input type="number" name="datos[peso]" id="peso" class="campo"><br>
+                <input type="number" name="datos[peso]" id="peso" class="campo" min="50" max="180"><br>
                 <div id="errorPeso"></div>
 
                 <label for="fecha">Fecha nacimento</label><br>
@@ -57,17 +53,13 @@
                 <div id="errorFecha"></div>
 
                 <label for="actividades">Actividades favoritas</label><br>
-                <div id="aficciones">
-                    <!-- <input type="hidden" name="datos[senderismo]" value="0"> -->
+                <div class="aficciones">
                     <input type="checkbox" name="datos[senderismo]" id="senderismo"> Senderismo<br>
-                    <!-- <input type="hidden" name="datos[ciclismo]" value="0"> -->
                     <input type="checkbox" name="datos[ciclismo]" id="ciclismo"> Ciclismo<br>
 
                 </div>
-                <div id="aficciones">
-                    <!-- <input type="hidden" name="datos[montañismo]" value="0"> -->
+                <div class="aficciones">
                     <input type="checkbox" name="datos[montañismo]" id="montañismo"> Montañismo<br>
-                    <!-- <input type="hidden" name="datos[correr]" value="0"> -->
                     <input type="checkbox" name="datos[correr]" id="correr"> Correr<br>
                 </div>
 

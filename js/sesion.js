@@ -1,3 +1,5 @@
+// Inicio de sesion
+// Comprobacion de errores en usuario
 let usuario = document.getElementById('usuario');
 let errorUsuario = document.getElementById('errorUsuario');
 usuario.addEventListener("input", usuarioError);
@@ -7,7 +9,6 @@ function usuarioError() {
         errorUsuario.classList.add('error');
         errorUsuario.textContent = 'El usuario es obligatorio';
         errorEnUsuario = true;
-
     } else {
         errorUsuario.classList.remove('error');
         errorUsuario.textContent = '';
@@ -15,6 +16,7 @@ function usuarioError() {
     return errorEnUsuario;
 }
 
+// Comprobacion de errores en contraseña
 let contraseña = document.getElementById('contraseña');
 let errorContraseña = document.getElementById('errorContraseña');
 contraseña.addEventListener("input", contraseñaError);
@@ -31,10 +33,12 @@ function contraseñaError() {
     return errorEnContraseña;
 }
 
+// Boton inicio de sesion
 document.getElementById('botonSesion').addEventListener('click', (e) => {
     e.preventDefault();
     let errores = usuarioError();
     errores = contraseñaError() || errores;
+    // Si no hay errores se ejecuta la consulta
     if (!errores) {
         let elementos = {
             "username": document.getElementById('usuario').value,
@@ -46,22 +50,11 @@ document.getElementById('botonSesion').addEventListener('click', (e) => {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(elementos)
-        }).then((response) => {
-            // switch (response.status) {
-            //     case 401:
-            //         return JSON.stringify({success: true, msg: 'credenciales no validas'})
-            //         break;
-            //     case 200:
-            //         return response.json();
-            //         break;
-            // }
-            // console.log(response);
-            return response.json();
-        })
+        }).then((response) => response.json())
             .then(function (data) {
-                // console.log(data);
                 if (data['success']) {
                     sessionStorage.setItem("usuario", document.getElementById('usuario').value);
+                    localStorage.setItem("usuario", document.getElementById('usuario').value);
                     sessionStorage.setItem("id", data['id']);
                     sessionStorage.setItem("token", data['token']);
                     window.location = "index.php";

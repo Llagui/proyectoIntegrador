@@ -1,21 +1,23 @@
 <main>
     <div class="rojo" id="barraBusqueda">
+        <!-- Formulario de busqueda de rutas -->
         <form action="#" method="post" id="formBusquedaPequeño">
+            <!-- Filtrado por nombre -->
             <div id="buscar">
                 <input type="submit" value="" class="azul " id="circulo">
-                <input type="image" src="../Iconos/search.svg" class="iconoPequeño" id="lupa">
+                <input type="image" src="../Iconos/search.svg" class="iconoPequeño" id="lupa" alt="lupa">
                 <?php
+                // Esta aqui por la lupa en la pantalla de inicio para que 'autofiltre'
                 if (isset($_GET['name']) && $_GET['name'] != '') {
                     echo '<input id="busqueda" value="' . $_GET["name"] . '">';
                 } else {
                     echo '<input id="busqueda">';
                 }
                 ?>
-
             </div>
-
+            <!-- Resto de filtros -->
             <div class="scrollmenu">
-                <select name="ordenar" id="ordenar" class="boton azul" class="hs-firstname">
+                <select name="ordenar" id="ordenar" class="boton azul">
                     <option value="" selected>Ordenar por</option>
                     <option value="distancia+">&#129045; Distancia</option>
                     <option value="distancia-">&#129047; Distancia</option>
@@ -54,6 +56,7 @@
                 <select name="actividad por" id="actividad" class="boton azul">
                     <option value="">Actividad</option>
                     <?php
+                    // Esta aqui por los enlaces en la pantalla de inicio para que 'autofiltre'
                     $actividades = ['Senderismo', 'Ciclismo', 'Correr', 'Alpinismo'];
                     foreach ($actividades as $key => $value) {
                         if (isset($_GET['activity']) && $_GET['activity'] == strtolower($value)) {
@@ -70,111 +73,17 @@
 
 
     <div id="resultados">
+        <!-- Aqui saldra el mapa -->
         <div id="mapa"></div>
+        <!-- Aqui aparecen las rutas que se generan por las consultas a la API -->
         <div id="rutas">
-            <!-- <a class="link" href="detalleRuta.php">
-                <div class="rutaRecomendada" onclick="">
-                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
-                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
-                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
-
-                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
-                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
-
-                    <div class="caract1">
-                        <div>Distancia: 5km</div>
-                        <div>Intensidad: Media</div>
-                    </div>
-                    <div class="caract2">
-                        <div>Tipo: Circular</div>
-                        <div>Desnivel: 100m</div>
-                    </div>
-                </div>
-            </a>
-            <a class="link" href="detalleRuta.php">
-                <div class="rutaRecomendada" onclick="">
-                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
-                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
-                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
-
-                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
-                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
-
-                    <div class="caract1">
-                        <div>Distancia: 5km</div>
-                        <div>Intensidad: Media</div>
-                    </div>
-                    <div class="caract2">
-                        <div>Tipo: Circular</div>
-                        <div>Desnivel: 100m</div>
-                    </div>
-                </div>
-            </a>
-            <a class="link" href="detalleRuta.php">
-                <div class="rutaRecomendada" onclick="">
-                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
-                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
-                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
-
-                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
-                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
-
-                    <div class="caract1">
-                        <div>Distancia: 5km</div>
-                        <div>Intensidad: Media</div>
-                    </div>
-                    <div class="caract2">
-                        <div>Tipo: Circular</div>
-                        <div>Desnivel: 100m</div>
-                    </div>
-                </div>
-            </a>
-            <a class="link" href="detalleRuta.php">
-                <div class="rutaRecomendada" onclick="">
-                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
-                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
-                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
-
-                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
-                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
-
-                    <div class="caract1">
-                        <div>Distancia: 5km</div>
-                        <div>Intensidad: Media</div>
-                    </div>
-                    <div class="caract2">
-                        <div>Tipo: Circular</div>
-                        <div>Desnivel: 100m</div>
-                    </div>
-                </div>
-            </a>
-            <a class="link" href="detalleRuta.php">
-                <div class="rutaRecomendada" onclick="">
-                    <img src="../img/pexels-rachel-claire-4997850.jpg" alt="" class="imagenPrincipal">
-                    <img src="../img/pexels-vanessa-garcia-6324457.jpg" alt="" class="imagenSegunda">
-                    <img src="../img/pexels-vanessa-garcia-6324238.jpg" alt="" class="imagenTercera">
-
-                    <div class="tituloPequeño titulo">Sendero de O Monte</div>
-                    <div class=" corazones"><img src="../Iconos/suit-heart-fill.svg" alt="" class="iconoPequeño">&nbsp;&nbsp;3214</div>
-
-                    <div class="caract1">
-                        <div>Distancia: 5km</div>
-                        <div>Intensidad: Media</div>
-                    </div>
-                    <div class="caract2">
-                        <div>Tipo: Circular</div>
-                        <div>Desnivel: 100m</div>
-                    </div>
-                </div>
-            </a> -->
         </div>
-
-
     </div>
-
 </main>
+
 <script src="../js/mapa.js"></script>
 <script src="../js/buscar.js"></script>
 <script>
+    // Click para que se auto lance la pagina
     document.getElementById('lupa').click();
 </script>

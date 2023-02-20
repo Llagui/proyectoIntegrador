@@ -1,3 +1,4 @@
+// Filtros y  comprobacion de errores en nombre
 let nombre = document.getElementById('nombre');
 let errorNombre = document.getElementById('errorNombre');
 nombre.addEventListener("input", nombreError);
@@ -14,6 +15,7 @@ function nombreError() {
     return errorEnNombre;
 }
 
+// Filtros y comprobacion de errores en nombre
 let usuario = document.getElementById('usuario');
 let errorUsuario = document.getElementById('errorUsuario');
 usuario.addEventListener("input", usuarioError);
@@ -27,6 +29,7 @@ function usuarioError() {
     } else {
         errorUsuario.classList.remove('error');
         errorUsuario.textContent = '';
+        // Consulta para comprobar que el nombre no exista
         fetch(`../api/checkuser/?username=${usuario.value}`)
             .then((response) => response.json())
             .then(function (data) {
@@ -35,11 +38,12 @@ function usuarioError() {
                     errorUsuario.classList.add('error');
                     errorEnUsuario = true;
                 }
-                return errorEnUsuario
+                return errorEnUsuario;
             })
     }
 }
 
+// Filtros y comprobacion de errores en email
 let correo = document.getElementById('correo');
 let errorCorreo = document.getElementById('errorCorreo');
 correo.addEventListener("input", correoError);
@@ -53,6 +57,7 @@ function correoError() {
         .match(
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )) {
+        // Si el correo cumple con la exprecion regular es valido
         errorCorreo.classList.remove('error');
         errorCorreo.textContent = "";
     } else {
@@ -63,6 +68,7 @@ function correoError() {
     return errorEnCorreo;
 }
 
+// Comprobacion de errores en caontraseña(no vacia)
 let contraseña = document.getElementById('contraseña');
 let errorContraseña = document.getElementById('errorContraseña');
 contraseña.addEventListener("input", contraseñaError);
@@ -79,6 +85,7 @@ function contraseñaError() {
     return errorEnContraseña;
 }
 
+// Comprobacion de errores en repita contraseña (no vacia y que sean iguales)
 let coincidenciaContraseñas = document.getElementById('coincidenciaContraseñas');
 let contraseñaRepe = document.getElementById("repitaContraseña");
 contraseñaRepe.addEventListener("input", contraseñaRepetidaError);
@@ -103,12 +110,13 @@ function contraseñaRepetidaError() {
 
 
 // PAGINA 2
+// Comprobacion de errores en altura 
 let estatura = document.getElementById('estatura');
 let errorEstatura = document.getElementById('errorEstatura');
 estatura.addEventListener("change", estaturaError);
 function estaturaError() {
     let errorEnEstatura = false;
-    if (estatura.value < 100 || estatura.value > 230) {
+    if ((estatura.value < 100 || estatura.value > 230) && (estatura.value != '')) {
         errorEstatura.classList.add('error');
         errorEstatura.textContent = 'Altura errónea';
         errorEnEstatura = true;
@@ -119,13 +127,13 @@ function estaturaError() {
     return errorEnEstatura;
 }
 
-
+// Comprobaion de errores en peso
 let peso = document.getElementById('peso');
 let errorPeso = document.getElementById('errorPeso');
 peso.addEventListener("change", pesoError);
 function pesoError() {
     let errorEnPeso = false;
-    if (peso.value < 50 || peso.value > 180) {
+    if ((peso.value < 50 || peso.value > 180) && (estatura.value != '')) {
         errorPeso.classList.add('error');
         errorPeso.textContent = 'Peso incorrecto';
         errorEnPeso = true;
@@ -136,12 +144,14 @@ function pesoError() {
     return errorEnPeso;
 }
 
+// Comprobaion de errores en fecha nacimiento
 let fecha = document.getElementById('fecha');
 let errorFecha = document.getElementById('errorFecha');
 fecha.addEventListener("change", fechaError);
 function fechaError() {
     let errorEnFecha = false;
     let fechaNacimiento = new Date(fecha.value);
+    // Fecha entre ahora y 1900
     if (fechaNacimiento < Date('01/01/1900') || fechaNacimiento > Date.now()) {
         errorFecha.classList.add('error');
         errorFecha.textContent = 'Fecha incorrecta';
@@ -153,6 +163,8 @@ function fechaError() {
     return errorEnFecha;
 }
 
+// BOTONES
+// CXomprobcaion de errores antes de continuar 
 let botonContinuar = document.getElementById('continuar');
 if (botonContinuar != null) {
     botonContinuar.addEventListener('click', continuar);
@@ -176,6 +188,7 @@ function continuar(e) {
 let botonRegistro = document.getElementById('registro');
 if (botonRegistro != null) {
     botonRegistro.addEventListener('click', registrar);
+    botonRegistro.addEventListener('enter', continuar);
 }
 
 let errorFormulario = document.getElementById('errorFormulario');
@@ -184,26 +197,29 @@ function registrar(e) {
     errorFormulario.textContent = '';
     e.preventDefault();
     let errores = false;
+    let fechaNac = fecha.value;
 
     if (estatura.value != '') {
         errores = estaturaError() || errores;
     }
     if (fecha.value != '') {
         errores = fechaError() || errores;
+    } else {
+        fechaNac = '0000-00-00';
     }
+
     if (peso.value != '') {
         errores = pesoError() || errores;
     }
 
     // Comprobar si los campos no esenciales estan rellenados y si si pasar funciones para comprobar errores
 
-    //crear objeto para pasar 
+    // crear objeto para pasar 
     let activities = [];
     activities.push(document.getElementById('senderismo').checked ? 'senderismo' : '');
     activities.push(document.getElementById('montañismo').checked ? 'montañismo' : '');
     activities.push(document.getElementById('ciclismo').checked ? 'ciclismo' : '');
     activities.push(document.getElementById('correr').checked ? 'correr' : '');
-
 
     let elementos = {
         "fullname": nombre.value,
@@ -212,11 +228,11 @@ function registrar(e) {
         "pass": contraseña.value,
         "height": estatura.value,
         "weight": peso.value,
-        "birthday": fecha.value,
+        "birthday": fechaNac,
         activities,
     };
 
-    // console.log(JSON.stringify(elementos));
+    // Si no hay errores hacer la consulta para registrar
     if (!errores) {
         fetch('../api/register/', {
             method: 'POST',
@@ -224,14 +240,13 @@ function registrar(e) {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(elementos)
-        }).then((response) => {
-            // console.log(response);
-            return response.json()
-        })
+        }).then((response) => response.json())
             .then(function (data) {
-                // console.log(data);
+
                 if (data['success']) {
+                    // Guarda credenciales en session storage
                     sessionStorage.setItem("usuario", usuario.value);
+                    localStorage.setItem("usuario", usuario.value);
                     sessionStorage.setItem("id", data['id']);
                     sessionStorage.setItem("token", data['token']);
                     window.location = "index.php";
@@ -241,9 +256,9 @@ function registrar(e) {
                 }
             })
     }
-
 }
 
+// Impide que al hacer enter se autoenvie el formulario
 let formularioRegistro = document.getElementById('formularioRegistro');
 if (formularioRegistro != null) {
     formularioRegistro.addEventListener('keypress', (e) => {
@@ -263,8 +278,10 @@ function guardarCambios(e) {
     errorFormulario.classList.remove('errorGrande');
     errorFormulario.textContent = '';
     e.preventDefault();
+
     //crear objeto para pasar 
     let activities = [];
+    let fechaNac = (fecha.value == '') ? '0000-00-00' : fecha.value;
     activities.push(document.getElementById('senderismo').checked ? 'senderismo' : '');
     activities.push(document.getElementById('montañismo').checked ? 'montañismo' : '');
     activities.push(document.getElementById('ciclismo').checked ? 'ciclismo' : '');
@@ -276,16 +293,16 @@ function guardarCambios(e) {
         "pass": contraseña.value,
         "height": estatura.value,
         "weight": peso.value,
-        "birthday": fecha.value,
+        "birthday": fechaNac,
         activities,
     };
-    let errores = correoError();
-    console.log(correoError());
+
     // No compruebo esto porque con el jwt ya es suficiente para saber si es el usuario
     // Y lo dejo por si alguien quiere cambiar su contraseña
     // errores = contraseñaError() || errores;
     // errores = contraseñaRepetidaError() || errores;
-    
+
+    let errores = correoError();
     if (estatura.value != '') {
         errores = estaturaError() || errores;
     }
@@ -295,7 +312,8 @@ function guardarCambios(e) {
     if (peso.value != '') {
         errores = pesoError() || errores;
     }
-    
+
+    // Si no hay errores se cambia perfil
     if (!errores) {
         fetch(`../api/user/?id=${sessionStorage.getItem('id')}`, {
             method: 'PUT',
@@ -304,19 +322,14 @@ function guardarCambios(e) {
                 'Authorization': `${sessionStorage.getItem('token')}`,
             },
             body: JSON.stringify(elementos)
-        }).then((response) => {
-            // switch (response.status) {
-            // case 400:
-            //     return JSON.stringify({ success: false, msg: 'Error con id' });
-            // case 401:
-            //     return JSON.stringify({ success: false, msg: 'Token no válido' });
-            // case 200:
-
-            return response.json();
-            // }
-        })
+        }).then((response) => response.json())
             .then(function (data) {
-                // console.log(data);
+                // se ha cambiado algo en el sesion storage
+                if (data['msg'] == 'Token invalido') {
+                    sessionStorage.clear();
+                    window.location = "index.php";
+                }
+
                 if (data['success']) {
                     window.location = "index.php";
                 } else {

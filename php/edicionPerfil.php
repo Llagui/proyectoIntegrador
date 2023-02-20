@@ -1,5 +1,5 @@
-
 <script>
+    // redireccion si intenta acceder un usuario que no ha iniciado sesion
     if (sessionStorage.getItem("usuario") == null) {
         window.location = "index.php";
     }
@@ -8,8 +8,8 @@
     <img src="../img/pexels-oziel-gomez-840667.jpg" alt="" class="imgFondoDerecha">
 
     <div class="azul" id="formularioCambios">
-        <form action="registro.php" method="post"  enctype="multipart/form-data">
-
+        <!-- Formulario de cambio en cuenta -->
+        <form action="registro.php" method="post" enctype="multipart/form-data">
             <h1>¡Bienvenido<br> a la configuración de <br> tu cuenta!</h1>
             <div id="cambiosCuenta">
                 <div class="imagenPerfil">
@@ -27,7 +27,6 @@
                 <label for="usuario" id="cambioUsuario">
                     Usuario <input type="text" name="datos[usuario]" id="usuario" class="campo" disabled>
                     <div id="errorUsuario"></div>
-
                 </label>
 
                 <label for="correo">
@@ -53,23 +52,22 @@
                 </label>
 
                 <label for="estatura">
-                    Estatura (cm) <input type="number" name="datos[estatura]" id="estatura" class="campo"><br>
+                    Estatura (cm) <input type="number" name="datos[estatura]" id="estatura" class="campo" min="100" max="230"><br>
                     <div id="errorEstatura"></div>
                 </label>
 
                 <label for="peso">
-                    Peso (kg) <input type="number" name="datos[peso]" id="peso" class="campo"><br>
+                    Peso (kg) <input type="number" name="datos[peso]" id="peso" class="campo" min="50" max="180"><br>
                     <div id="errorPeso"></div>
                 </label>
 
                 <label for="actividades" id="cambioActividades">
                     <p>Actividades favoritas</p>
-                    <div id="aficciones">
-
+                    <div class="aficciones">
                         <input type="checkbox" name="datos[senderismo]" id="senderismo"> Senderismo<br>
                         <input type="checkbox" name="datos[ciclismo]" id="ciclismo"> Ciclismo<br>
                     </div>
-                    <div id="aficciones">
+                    <div class="aficciones">
                         <input type="checkbox" name="datos[montañismo]" id="montañismo"> Montañismo<br>
                         <input type="checkbox" name="datos[correr]" id="correr"> Correr<br>
                     </div>
@@ -77,17 +75,19 @@
             </div>
             <br>
             <center>
-            <div id="errorFormulario"></div>
-            
+                <div id="errorFormulario"></div>
                 <input type="submit" value="Guardar cambios" class="boton rojo" name="registro" id='guardarCambios'><br>
-
+            </center>
         </form>
-        <button class="boton rojo" id="eliminar">Eliminar cuenta</button>
-        <br>
-        <a href="index.php">Volver</a>
+        <!-- Botones abajo -->
+        <center>
+            <button class="boton rojo" id="eliminar">Eliminar cuenta</button>
+            <br>
+            <a href="index.php">Volver</a>
         </center>
-
     </div>
+
+    <!-- Ventana modal confirmar eliminacion -->
     <div id="ventanaEliminar">
         <div class="azul">
             <center>
@@ -102,6 +102,7 @@
 
     <img src="../img/pexels-rrinna-2071553.jpg" alt="" class="imgFondoIzquierda">
 </main>
+
 <script src="../js/seguridadContrasena.js"></script>
 <script src="../js/registro.js"></script>
 <script src="../js/ventanaEliminar.js"></script>

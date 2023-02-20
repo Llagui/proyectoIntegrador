@@ -1,3 +1,4 @@
+// Funcion que muestra la posible seguridad de una contraseña
 let inputContraseña = document.getElementById("contraseña");
 let contraseñaRepetida = document.getElementById("repitaContraseña");
 
@@ -16,22 +17,27 @@ inputContraseña.addEventListener("input", () => {
     //Valoracion contraseña segun longitud
     seguridadContraseña += Math.round(contraseña.length / 4);
 
+    // Texto
     document.getElementById("seguridadContraseña").textContent = (seguridadContraseña < 5) ? "Muy débil" :
         (seguridadContraseña < 7) ? "Débil" :
             (seguridadContraseña < 9) ? "Normal" :
                 (seguridadContraseña < 11) ? "Segura" :
                     "Muy segura";
 
+    // Color de fondo 
     document.getElementById("seguridadContraseña").style.backgroundColor = (seguridadContraseña < 5) ? "Red" :
         (seguridadContraseña < 7) ? "Crimson" :
             (seguridadContraseña < 9) ? "OrangeRed" :
                 (seguridadContraseña < 11) ? "SeaGreen" :
                     "ForestGreen";
 
+    // se habilita repetir contraseña cuando se pone algo en la contraseña
     if (contraseña == '') {
         document.getElementById("seguridadContraseña").textContent = '';
         document.getElementById("seguridadContraseña").classList.remove('seguridad');
         contraseñaRepetida.disabled = true;
+        // se pierde el valor de contraseña repetida en si la otra no hay nada
+        contraseñaRepetida.value = '';
     } else {
         contraseñaRepetida.disabled = false;
         document.getElementById("seguridadContraseña").classList.add('seguridad');

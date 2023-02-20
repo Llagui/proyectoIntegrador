@@ -1,4 +1,4 @@
 <?php
 // Activar en el servidor
-// header('Location: ./php/');
+header('Location: ./php/');
 ?>

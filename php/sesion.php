@@ -1,25 +1,15 @@
 <script>
+    // redireccion si intenta acceder un usuario que ha iniciado sesion
     if (sessionStorage.getItem("usuario") != null) {
         window.location = "index.php";
     }
 </script>
 <main id="contenedor">
-    <?php
-    if (isset($_REQUEST["cerrarSesion"])) {
-        $_SESSION = array();
-        session_destroy();
-    ?>
-        <script>
-            sessionStorage.clean();
-            window.location = "index.php";
-        </script>
-    <?php
-    }
-    ?>
     <img src="../img/pexels-suliman-sallehi-1822461.jpg" alt="" class="imgFondoIzquierda">
 
     <div class="azul" id="formularioSesion">
         <h1>¡Hola de nuevo! <br> Inicia sesión y empieza a explorar</h1>
+        <!-- formulario inicio de sesion -->
         <form action="sesion.php" method="post">
             <label for="usuario">Usuario</label><br>
             <input type="text" name="usuario" id="usuario" class="campo"><br>

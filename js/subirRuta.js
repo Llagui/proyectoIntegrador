@@ -1,7 +1,7 @@
+// Comprobacion errores en titulo de la ruta
 let ruta = document.getElementById('ruta');
 let errorRuta = document.getElementById('errorRuta');
 ruta.addEventListener("input", rutaError);
-
 function rutaError() {
     let errorEnRuta = false;
     if (ruta.value == '') {
@@ -15,11 +15,10 @@ function rutaError() {
     return errorEnRuta;
 }
 
-
+// Comprobacion errores en descripcion de la ruta
 let descripcion = document.getElementById('descripcion');
 let errorDescripcion = document.getElementById('errorDescripcion');
 descripcion.addEventListener("input", descripcionError);
-
 function descripcionError() {
     let errorEnDescripcion = false;
     if (descripcion.value == '') {
@@ -33,11 +32,10 @@ function descripcionError() {
     return errorEnDescripcion;
 }
 
-
+// Comprobacion errores en intensidad de la ruta
 let intensidad = document.getElementById('intensidad');
 let errorIntensidad = document.getElementById('errorIntensidad');
 intensidad.addEventListener("input", intensidadError);
-
 function intensidadError() {
     let errorEnIntensidad = false;
     if (intensidad.value == '') {
@@ -51,11 +49,10 @@ function intensidadError() {
     return errorEnIntensidad;
 }
 
-
+// Comprobacion errores en actividad de la ruta
 let actividad = document.getElementById('actividad');
 let errorActividad = document.getElementById('errorActividad');
 actividad.addEventListener("input", actividadError);
-
 function actividadError() {
     let errorEnActividad = false;
     if (actividad.value == '') {
@@ -69,12 +66,10 @@ function actividadError() {
     return errorEnActividad;
 }
 
-
+// Comprobacion errores en la subida del gpx
 let gpx = document.getElementById('gpx');
-
 let errorGpx = document.getElementById('errorGpx');
 gpx.addEventListener("input", gpxError);
-
 function gpxError() {
     let errorEnGpx = false;
     if (gpx.value == '') {
@@ -89,9 +84,9 @@ function gpxError() {
 }
 
 
-
 document.getElementById('subirRuta').addEventListener('click', (e) => {
     e.preventDefault();
+    // Comprobcaion de errores
     let errores = rutaError();
     errores = descripcionError() || errores;
     errores = intensidadError() || errores;
@@ -99,8 +94,7 @@ document.getElementById('subirRuta').addEventListener('click', (e) => {
     errores = gpxError() || errores;
 
     if (!errores) {
-        // let data = new FormData();
-        // data.append('file', gpx);
+        // Encapsulamiento del gpx en form data
         let input = document.querySelector('input[type="file"]');
         let data = new FormData();
         data.append('file', input.files[0]);
@@ -109,10 +103,10 @@ document.getElementById('subirRuta').addEventListener('click', (e) => {
         if (document.getElementById('lineal').checked) {
             circular = false;
         }
-        // console.log(descripcion.value.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+
+        // Preparacion de datos 
         let descripcionTxt = descripcion.value.replace(/(?:\r\n|\r|\n)/g, '<br>').normalize('NFD').replace(/[\u0300-\u036f]/g, "");
         let nombre = ruta.value.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-        // console.log(descripcionTxt);
 
         let elementos = {
             "route_name": nombre,
@@ -122,7 +116,6 @@ document.getElementById('subirRuta').addEventListener('click', (e) => {
             "activity": actividad.value,
             "circular": circular,
         }
-        console.log(JSON.stringify(elementos));
 
         //envio los datos en la cabezera pq es necesario enviar el gpx en el body
         fetch('../api/routes/', {
@@ -132,15 +125,16 @@ document.getElementById('subirRuta').addEventListener('click', (e) => {
                 'Data': JSON.stringify(elementos)
             },
             body: data
-        }).then((response) => {
-            // console.log(response);
-            return response.json();
-        })
+        }).then((response) => response.json())
             .then(function (data) {
-                // console.log(data);
                 if (data['success']) {
                     window.location = "misRutas.php?rutaCreada=1";
                 } else {
+                    // Se ha tocado algo en el sesion storage
+                    if (data['msg'] == "Token no valido. Inténtelo de nuevo más tarde") {
+                        sessionStorage.clear();
+                        window.location = "index.php";
+                    }
                     let errorFormulario = document.getElementById('errorFormulario');
                     errorFormulario.textContent = data['msg'];
                     errorFormulario.classList.add('errorGrande');

@@ -1,4 +1,5 @@
-function rutasRecomendadas(num,id = 0) {
+// Funcion que devuelve los datos de n numero de rutas al azar
+function rutasRecomendadas(num, id = 0) {
     fetch('../api/routes/', {
         method: 'GET',
         headers: {
@@ -7,12 +8,15 @@ function rutasRecomendadas(num,id = 0) {
         },
     }).then(response => {
         return response.json();
-    
+
     }).then(function (data) {
-        let datos = data['rutas'].filter(ruta => ruta.id != id).sort(() =>0.5 - Math.random());
-        // console.log(datos);
+        // Des organizacion de rutas
+        let datos = data['rutas'].filter(ruta => ruta.id != id).sort(() => 0.5 - Math.random());
+
+        // Imprecion de rutas
         datos.slice(0, num).forEach(element => {
             let intensidad;
+            // traduccion de intensidad a letras
             switch (element.intensity) {
                 case '0':
                     intensidad = 'Sencilla';
@@ -52,6 +56,6 @@ function rutasRecomendadas(num,id = 0) {
                     </div>
                 </a>`;
         });
-    
+
     })
 }
